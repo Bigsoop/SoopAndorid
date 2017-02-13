@@ -14,4 +14,9 @@
     tools:context="com.example.sangh.soop.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
+    <FrameLayout
+        android:id="@+id/content_fragment_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></FrameLayout>
+
 </RelativeLayout>

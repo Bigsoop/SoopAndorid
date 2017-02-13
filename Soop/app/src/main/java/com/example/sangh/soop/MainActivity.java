@@ -2,10 +2,13 @@ package com.example.sangh.soop;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,6 +16,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.example.sangh.soop.Fragment.MainFragment;
 import com.example.sangh.soop.view.DrawerItem;
 
 import java.util.ArrayList;
@@ -31,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -41,6 +44,23 @@ public class MainActivity extends AppCompatActivity {
 
         makeDrawerMenu();
 
+        FragmentManager fm = getSupportFragmentManager();
+        Fragment fragment = fm.findFragmentById(R.id.content_main);
+        if(fragment==null) {
+            fragment = new MainFragment();
+            fm.beginTransaction()
+                    .add(R.id.content_main, fragment)
+                    .commit();
+        }
+
+
+    }
+
+    public class ListRow extends RecyclerView.ViewHolder{
+
+        public ListRow(View view){
+            super(view);
+        }
     }
 
     private void makeDrawerMenu(){
@@ -119,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 
 
 }
