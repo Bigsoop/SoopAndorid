@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void makeDrawerMenu(){
+
         layout_drawer = (LinearLayout)navigationView.getHeaderView(0);
         drawableMenu = new ArrayList<>();
         for(int i=0; i<Constant.menuNameList.length;i++){

@@ -11,8 +11,8 @@ public class MainItem {
     private String mUniName;
     private String mOrder;
     private int mUniMark;
-    private int mLike;
-    private int mComment;
+    private String mLike;
+    private String mComment;
     private String mBody;
 
     public UUID getId() {
@@ -43,19 +43,19 @@ public class MainItem {
         mUniMark = uniMark;
     }
 
-    public int getLike() {
+    public String getLike() {
         return mLike;
     }
 
-    public void setLike(int like) {
+    public void setLike(String like) {
         mLike = like;
     }
 
-    public int getComment() {
+    public String getComment() {
         return mComment;
     }
 
-    public void setComment(int comment) {
+    public void setComment(String comment) {
         mComment = comment;
     }
 
