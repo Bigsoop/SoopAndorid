@@ -32,7 +32,7 @@
                 android:layout_height="50dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:src="@drawable/logo"/>
+                android:src="@drawable/stanford"/>
 
             <TextView
                 android:id="@+id/uni_name"
@@ -44,10 +44,10 @@
 
             <ImageView
                 android:layout_toRightOf="@+id/uni_name"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
                 android:layout_alignParentTop="true"
-                android:src="@drawable/arrow_right"/>
+                android:src="@drawable/school"/>
 
             <TextView
                 android:id="@+id/story_order"
@@ -60,9 +60,10 @@
 
             <ImageView
                 android:id="@+id/likeImg"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/arrow_right"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@drawable/like"
+                android:layout_marginRight="5dp"
                 android:layout_alignBottom="@+id/story_order"
                 android:layout_toStartOf="@+id/like"/>
 
@@ -77,9 +78,10 @@
 
             <ImageView
                 android:id="@+id/commentImg"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/arrow_right"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/comment"
                 android:layout_alignBottom="@+id/story_order"
                 android:layout_toStartOf="@+id/comment"/>
 
