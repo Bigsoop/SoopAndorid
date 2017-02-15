@@ -28,8 +28,8 @@
 
             <ImageView
                 android:id="@+id/uni_mark"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="37.5dp"
+                android:layout_height="37.5dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:src="@drawable/stanford"/>
@@ -54,19 +54,10 @@
 
             <ImageView
                 android:layout_toRightOf="@+id/uni_name"
-                android:layout_width="11dp"
-                android:layout_height="11dp"
+                android:layout_width="12.5dp"
+                android:layout_height="12.5dp"
                 android:layout_alignParentTop="true"
                 android:src="@drawable/school"/>
-
-            <ImageView
-                android:id="@+id/likeImg"
-                android:layout_width="11dp"
-                android:layout_height="11dp"
-                android:src="@drawable/like"
-                android:layout_marginRight="5dp"
-                android:layout_alignBottom="@+id/main_date"
-                android:layout_toStartOf="@+id/like"/>
 
             <TextView
                 android:id="@+id/like"
@@ -80,8 +71,8 @@
 
             <ImageView
                 android:id="@+id/commentImg"
-                android:layout_width="11dp"
-                android:layout_height="11dp"
+                android:layout_width="12.5dp"
+                android:layout_height="12.5dp"
                 android:layout_marginRight="5dp"
                 android:src="@drawable/comment"
                 android:layout_alignBottom="@+id/main_date"
@@ -97,6 +88,15 @@
                 android:layout_marginEnd="15dp"
                 android:layout_alignBottom="@+id/like"
                 android:layout_alignParentEnd="true"/>
+
+            <ImageView
+                android:id="@+id/likeImg"
+                android:layout_width="12.5dp"
+                android:layout_height="12.5dp"
+                android:src="@drawable/like"
+                android:layout_marginRight="5dp"
+                android:layout_alignBottom="@+id/like"
+                android:layout_toStartOf="@+id/like"/>
 
         </RelativeLayout>
 

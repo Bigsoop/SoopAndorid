@@ -21,14 +21,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/uni_mark_content"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:src="@drawable/stanford"/>
-
             <TextView
                 android:id="@+id/uni_name_content"
                 android:layout_width="wrap_content"
@@ -38,6 +30,23 @@
                 tools:text="스탠포드대학교"
                 android:layout_toRightOf="@id/uni_mark_content"/>
 
+            <ImageView
+                android:layout_toRightOf="@+id/uni_name_content"
+                android:layout_width="12.5dp"
+                android:layout_height="12.5dp"
+                android:layout_alignParentTop="true"
+                android:src="@drawable/school"/>
+
+            <ImageView
+                android:id="@+id/uni_mark_content"
+                android:layout_width="37.5dp"
+                android:layout_height="37.5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/stanford"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"/>
+
             <TextView
                 android:id="@+id/main_date_content"
                 android:layout_width="wrap_content"
@@ -46,13 +55,6 @@
                 tools:text="2017년 2월 15일 오후 9:37"
                 android:layout_below="@+id/uni_name_content"
                 android:layout_toEndOf="@+id/uni_mark_content"/>
-
-            <ImageView
-                android:layout_toRightOf="@+id/uni_name_content"
-                android:layout_width="11dp"
-                android:layout_height="11dp"
-                android:layout_alignParentTop="true"
-                android:src="@drawable/school"/>
 
         </RelativeLayout>
 
@@ -73,8 +75,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1080"
-                android:textSize="13dp"
-                tools:text="우리학교 솔직히 지잡대아님? 자꾸 세계 1류 님? 자꾸 세계 1류 대학 인척하는데 왜그러는지 "/>
+                android:textSize="12dp"
+                tools:text="우리학교 솔직히 지잡대아님? 자꾸 세계 1류 대학인척 하는데 무슨 소리인지 모르겠다는 것은 사실 페이크였고 우리학교는 세계 최고의 대학교인건 솔직히ㅇㅈ? ㄹㅇㅍㅌ ?? ㅂㅂㅂㄱ?? ㅇㅇ ㅇㅇㅈ"/>
 
             <TextView
                 android:layout_width="0dp"
@@ -93,7 +95,7 @@
 
             <LinearLayout
                 android:padding="2.5dp"
-                android:id="@+id/like_comment"
+                android:id="@+id/like_content"
                 android:layout_marginLeft="17.5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="23dp"
@@ -102,8 +104,8 @@
                 android:gravity="center">
 
                 <ImageView
-                    android:layout_width="11dp"
-                    android:layout_height="11dp"
+                    android:layout_width="12.5dp"
+                    android:layout_height="12.5dp"
                     android:background="@drawable/like"/>
 
                 <TextView
@@ -111,29 +113,6 @@
                     android:layout_height="wrap_content"
                     android:text="좋아요 100명"
                     android:id="@+id/textView5"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:padding="2.5dp"
-                android:id="@+id/share"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="23dp"
-                android:background="#cbf4e0"
-                android:orientation="horizontal"
-                android:gravity="center">
-
-                <ImageView
-                    android:layout_width="11dp"
-                    android:layout_height="11dp"
-                    android:background="@drawable/share"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="공유 20회"
-                    android:id="@+id/textView4"/>
             </LinearLayout>
 
             <LinearLayout
@@ -148,14 +127,38 @@
                 android:gravity="center">
 
                 <ImageView
-                    android:layout_width="11dp"
-                    android:layout_height="11dp"
+                    android:layout_width="12.5dp"
+                    android:layout_height="12.5dp"
                     android:background="@drawable/comment"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="댓글 20개"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:padding="2.5dp"
+                android:id="@+id/share"
+                android:layout_marginRight="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="23dp"
+                android:background="#cbf4e0"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true">
+
+                <ImageView
+                    android:layout_width="12.5dp"
+                    android:layout_height="12.5dp"
+                    android:background="@drawable/share"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="공유 20회"
+                    android:id="@+id/textView4"/>
             </LinearLayout>
 
         </RelativeLayout>
