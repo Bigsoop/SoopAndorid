@@ -14,17 +14,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="25"
-            android:id="@+id/textView4"/>
-
         <RelativeLayout
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="150">
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/uni_mark_content"
@@ -59,56 +54,12 @@
                 android:layout_alignParentTop="true"
                 android:src="@drawable/school"/>
 
-            <ImageView
-                android:id="@+id/likeImg_content"
-                android:layout_width="11dp"
-                android:layout_height="11dp"
-                android:src="@drawable/like"
-                android:layout_marginRight="5dp"
-                android:layout_alignBottom="@+id/main_date_content"
-                android:layout_toStartOf="@+id/like_content"/>
-
-            <TextView
-                android:id="@+id/like_content"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                tools:text="105042"
-                android:textSize="11dp"
-                android:layout_alignBottom="@+id/main_date_content"
-                android:layout_toStartOf="@+id/commentImg_content"/>
-
-            <ImageView
-                android:id="@+id/commentImg_content"
-                android:layout_width="11dp"
-                android:layout_height="11dp"
-                android:layout_marginRight="5dp"
-                android:src="@drawable/comment"
-                android:layout_alignBottom="@+id/main_date_content"
-                android:layout_toStartOf="@+id/comment_content"/>
-
-            <TextView
-                android:id="@+id/comment_content"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="15dp"
-                tools:text="121515"
-                android:textSize="11dp"
-                android:layout_marginEnd="15dp"
-                android:layout_alignBottom="@+id/like_content"
-                android:layout_alignParentEnd="true"/>
-
         </RelativeLayout>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="150"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <TextView
@@ -120,12 +71,10 @@
 
                 android:id="@+id/body_content"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1080"
                 android:textSize="13dp"
-                android:maxLines="4"
-                android:ellipsize="end"
-                tools:text="우리학교 솔직히 지잡대아님? 자꾸 세계 1류 대학 인척하는데 왜그러는지 "/>
+                tools:text="우리학교 솔직히 지잡대아님? 자꾸 세계 1류 님? 자꾸 세계 1류 대학 인척하는데 왜그러는지 "/>
 
             <TextView
                 android:layout_width="0dp"
@@ -134,10 +83,82 @@
 
         </LinearLayout>
 
-        <TextView
+
+        <RelativeLayout
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="5dp"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="55"/>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:padding="2.5dp"
+                android:id="@+id/like_comment"
+                android:layout_marginLeft="17.5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="23dp"
+                android:background="#cbf4e0"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="11dp"
+                    android:layout_height="11dp"
+                    android:background="@drawable/like"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="좋아요 100명"
+                    android:id="@+id/textView5"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:padding="2.5dp"
+                android:id="@+id/share"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="23dp"
+                android:background="#cbf4e0"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="11dp"
+                    android:layout_height="11dp"
+                    android:background="@drawable/share"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="공유 20회"
+                    android:id="@+id/textView4"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:padding="2.5dp"
+                android:id="@+id/comment_content"
+                android:layout_width="wrap_content"
+                android:layout_height="23dp"
+                android:background="#cbf4e0"
+                android:layout_marginRight="5dp"
+                android:layout_toLeftOf="@+id/share"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="11dp"
+                    android:layout_height="11dp"
+                    android:background="@drawable/comment"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="댓글 20개"/>
+            </LinearLayout>
+
+        </RelativeLayout>
 
     </LinearLayout>
 
