@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.sangh.soop.Fragment.MainFragment;
 import com.example.sangh.soop.view.DrawerItem;
+import com.example.sangh.soop.view.GreenToast;
 
 import java.util.ArrayList;
 
@@ -32,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //new GreenToast(this).showToast("hello");
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -75,35 +78,35 @@ public class MainActivity extends AppCompatActivity {
         drawableMenu.get(Constant.MENU_MAIN).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"Main clicked!",Toast.LENGTH_SHORT).show();
+                new GreenToast(getApplicationContext()).showToast("Main clicked");
             }
         });
 
         drawableMenu.get(Constant.MENU_SEARCH).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"search clicked!",Toast.LENGTH_SHORT).show();
+                new GreenToast(getApplicationContext()).showToast("search clicked");
             }
         });
 
         drawableMenu.get(Constant.MENU_MAIL).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"Mail clicked!",Toast.LENGTH_SHORT).show();
+                new GreenToast(getApplicationContext()).showToast("Mail clicked");
             }
         });
 
         drawableMenu.get(Constant.MENU_SETTING).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"setting clicked!",Toast.LENGTH_SHORT).show();
+                new GreenToast(getApplicationContext()).showToast("setting clicked");
 
             }
         });
         drawableMenu.get(Constant.MENU_INFO).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"info clicked!",Toast.LENGTH_SHORT).show();
+                new GreenToast(getApplicationContext()).showToast("info clicked");
             }
         });
 

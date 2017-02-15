@@ -3,21 +3,19 @@ package com.example.sangh.soop.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.sangh.soop.ContentActivity;
 import com.example.sangh.soop.Model.MainItem;
 import com.example.sangh.soop.Model.MainItemLab;
 import com.example.sangh.soop.R;
+import com.example.sangh.soop.view.GreenToast;
 
 import java.util.List;
 
@@ -90,7 +88,7 @@ public class MainFragment extends Fragment{
 
         @Override
         public void onClick(View view){
-            Toast.makeText(getActivity(), "선택됨!", Toast.LENGTH_SHORT).show();
+            new GreenToast(getActivity()).showToast("선택됨!");
             Intent intent = new Intent(getActivity(), ContentActivity.class);
             startActivity(intent);
         }
