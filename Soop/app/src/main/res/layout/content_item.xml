@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="25"
-            android:id="@+id/textView3"/>
+            android:id="@+id/textView4"/>
 
         <RelativeLayout
             android:orientation="horizontal"
@@ -27,7 +27,7 @@
             android:layout_weight="150">
 
             <ImageView
-                android:id="@+id/uni_mark"
+                android:id="@+id/uni_mark_content"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="10dp"
@@ -35,67 +35,67 @@
                 android:src="@drawable/stanford"/>
 
             <TextView
-                android:id="@+id/uni_name"
+                android:id="@+id/uni_name_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15dp"
                 android:textStyle="bold"
                 tools:text="스탠포드대학교"
-                android:layout_toRightOf="@id/uni_mark"/>
+                android:layout_toRightOf="@id/uni_mark_content"/>
 
             <TextView
-                android:id="@+id/main_date"
+                android:id="@+id/main_date_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="10dp"
                 tools:text="2017년 2월 15일 오후 9:37"
-                android:layout_below="@+id/uni_name"
-                android:layout_toEndOf="@+id/uni_mark"/>
+                android:layout_below="@+id/uni_name_content"
+                android:layout_toEndOf="@+id/uni_mark_content"/>
 
             <ImageView
-                android:layout_toRightOf="@+id/uni_name"
+                android:layout_toRightOf="@+id/uni_name_content"
                 android:layout_width="11dp"
                 android:layout_height="11dp"
                 android:layout_alignParentTop="true"
                 android:src="@drawable/school"/>
 
             <ImageView
-                android:id="@+id/likeImg"
+                android:id="@+id/likeImg_content"
                 android:layout_width="11dp"
                 android:layout_height="11dp"
                 android:src="@drawable/like"
                 android:layout_marginRight="5dp"
-                android:layout_alignBottom="@+id/main_date"
-                android:layout_toStartOf="@+id/like"/>
+                android:layout_alignBottom="@+id/main_date_content"
+                android:layout_toStartOf="@+id/like_content"/>
 
             <TextView
-                android:id="@+id/like"
+                android:id="@+id/like_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
                 tools:text="105042"
                 android:textSize="11dp"
-                android:layout_alignBottom="@+id/main_date"
-                android:layout_toStartOf="@+id/commentImg"/>
+                android:layout_alignBottom="@+id/main_date_content"
+                android:layout_toStartOf="@+id/commentImg_content"/>
 
             <ImageView
-                android:id="@+id/commentImg"
+                android:id="@+id/commentImg_content"
                 android:layout_width="11dp"
                 android:layout_height="11dp"
                 android:layout_marginRight="5dp"
                 android:src="@drawable/comment"
-                android:layout_alignBottom="@+id/main_date"
-                android:layout_toStartOf="@+id/comment"/>
+                android:layout_alignBottom="@+id/main_date_content"
+                android:layout_toStartOf="@+id/comment_content"/>
 
             <TextView
-                android:id="@+id/comment"
+                android:id="@+id/comment_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="15dp"
                 tools:text="121515"
                 android:textSize="11dp"
                 android:layout_marginEnd="15dp"
-                android:layout_alignBottom="@+id/like"
+                android:layout_alignBottom="@+id/like_content"
                 android:layout_alignParentEnd="true"/>
 
         </RelativeLayout>
@@ -118,7 +118,7 @@
 
             <TextView
 
-                android:id="@+id/body"
+                android:id="@+id/body_content"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1080"

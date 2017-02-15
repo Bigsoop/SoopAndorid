@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#eaeaea">
+
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_below="@+id/appbar_layout"
+        android:id="@+id/content_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="#cbf4e0"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_alignParentBottom="true">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="20"/>
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:background="#ffffff"
+            android:layout_weight="1140"
+            android:hint="   댓글을 입력해주세요. ^0^"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_weight="220"
+            android:text="등록"
+            android:textSize="15dp"
+            android:textColor="#ffffff"
+            android:background="#029f54"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="20"/>
+
+    </LinearLayout>
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:theme="@style/AppBarOverlay"
+        android:background="#00d26d"
+        android:gravity="center"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="32"/>
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_content"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="172"
+            android:src="@drawable/logo"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            app:contentInsetStartWithNavigation="0dp"
+            app:popupTheme="@style/PopupOverlay"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="400"/>
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_weight="380"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/logo"
+                    android:id="@+id/imageView3"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="516"
+                    />
+            </LinearLayout>
+
+        </android.support.v7.widget.Toolbar>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="32"/>
+
+    </android.support.design.widget.AppBarLayout>
+
+</RelativeLayout>

@@ -1,5 +1,6 @@
 package com.example.sangh.soop.Model;
 
+import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -9,7 +10,7 @@ import java.util.UUID;
 public class MainItem {
     private UUID id;
     private String mUniName;
-    private String mOrder;
+    private String mDate;
     private int mUniMark;
     private String mLike;
     private String mComment;
@@ -27,12 +28,10 @@ public class MainItem {
         mUniName = uniName;
     }
 
-    public String getOrder() {
-        return mOrder;
-    }
+    public String getDate() {return mDate;}
 
-    public void setOrder(String order) {
-        mOrder = order;
+    public void setDate(String date) {
+        mDate = date;
     }
 
     public int getUniMark() {

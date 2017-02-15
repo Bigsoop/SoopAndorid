@@ -1,5 +1,6 @@
 package com.example.sangh.soop.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.sangh.soop.ContentActivity;
 import com.example.sangh.soop.Model.MainItem;
 import com.example.sangh.soop.Model.MainItemLab;
 import com.example.sangh.soop.R;
@@ -59,8 +61,8 @@ public class MainFragment extends Fragment{
     private class MainHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private MainItem mItem;
         private ImageView mUniMark;
+        private TextView mDate;
         private TextView mUniName;
-        private TextView mOrder;
         private TextView mLike;
         private TextView mComment;
         private TextView mBody;
@@ -69,8 +71,8 @@ public class MainFragment extends Fragment{
             super(itemView);
             itemView.setOnClickListener(this);
             //mUniMark = (ImageView) itemView.findViewById(R.id.uni_mark);
+            mDate =(TextView) itemView.findViewById(R.id.main_date);
             mUniName = (TextView) itemView.findViewById(R.id.uni_name);
-            mOrder = (TextView) itemView.findViewById(R.id.story_order);
             mLike = (TextView) itemView.findViewById(R.id.like);
             mComment = (TextView) itemView.findViewById(R.id.comment);
             mBody = (TextView) itemView.findViewById(R.id.body);
@@ -80,15 +82,17 @@ public class MainFragment extends Fragment{
             mItem = item;
             //mUniMark.setImageResource(mItem.getUniMark());
             mUniName.setText(mItem.getUniName());
-            mOrder.setText(mItem.getOrder());
             mLike.setText(mItem.getLike());
             mComment.setText(mItem.getComment());
             mBody.setText(mItem.getBody());
+            mDate.setText(mItem.getDate());
         }
 
         @Override
         public void onClick(View view){
-            Toast.makeText(getActivity(), mItem.getOrder() + "선택됨!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "선택됨!", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getActivity(), ContentActivity.class);
+            startActivity(intent);
         }
     }
 

@@ -45,11 +45,11 @@ public class MainActivity extends AppCompatActivity {
         makeDrawerMenu();
 
         FragmentManager fm = getSupportFragmentManager();
-        Fragment fragment = fm.findFragmentById(R.id.content_main);
+        Fragment fragment = fm.findFragmentById(R.id.content_fragment_layout);
         if(fragment==null) {
             fragment = new MainFragment();
             fm.beginTransaction()
-                    .add(R.id.content_main, fragment)
+                    .add(R.id.content_fragment_layout, fragment)
                     .commit();
         }
 
