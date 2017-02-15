@@ -9,12 +9,30 @@ import java.util.UUID;
 
 public class MainItem {
     private UUID id;
+    private int mUniMark;
     private String mUniName;
     private String mDate;
-    private int mUniMark;
-    private String mLike;
-    private String mComment;
+    private String userImg;
     private String mBody;
+    private int mLike;
+    private int mComment;
+    private int mShare;
+
+    public String getUserImg() {
+        return userImg;
+    }
+
+    public void setUserImg(String userImg) {
+        this.userImg = userImg;
+    }
+
+    public int getShare() {
+        return mShare;
+    }
+
+    public void setShare(int share) {
+        mShare = share;
+    }
 
     public UUID getId() {
         return id;
@@ -42,19 +60,19 @@ public class MainItem {
         mUniMark = uniMark;
     }
 
-    public String getLike() {
+    public int getLike() {
         return mLike;
     }
 
-    public void setLike(String like) {
+    public void setLike(int like) {
         mLike = like;
     }
 
-    public String getComment() {
+    public int getComment() {
         return mComment;
     }
 
-    public void setComment(String comment) {
+    public void setComment(int comment) {
         mComment = comment;
     }
 

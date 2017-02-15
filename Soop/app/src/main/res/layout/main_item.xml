@@ -78,17 +78,6 @@
                 android:layout_alignBottom="@+id/main_date"
                 android:layout_toStartOf="@+id/comment"/>
 
-            <TextView
-                android:id="@+id/comment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="15dp"
-                tools:text="121515"
-                android:textSize="11dp"
-                android:layout_marginEnd="15dp"
-                android:layout_alignBottom="@+id/like"
-                android:layout_alignParentEnd="true"/>
-
             <ImageView
                 android:id="@+id/likeImg"
                 android:layout_width="12.5dp"
@@ -97,6 +86,17 @@
                 android:layout_marginRight="5dp"
                 android:layout_alignBottom="@+id/like"
                 android:layout_toStartOf="@+id/like"/>
+
+            <TextView
+                android:id="@+id/comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                tools:text="121515"
+                android:textSize="11dp"
+                android:layout_marginEnd="15dp"
+                android:layout_alignBottom="@+id/commentImg"
+                android:layout_alignParentEnd="true"/>
 
         </RelativeLayout>
 
