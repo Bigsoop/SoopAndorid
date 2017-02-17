@@ -56,17 +56,18 @@ public class MainFragment extends Fragment{
         public MainHolder(View itemView){
             super(itemView);
             itemView.setOnClickListener(this);
-            //mUniMark = (ImageView) itemView.findViewById(R.id.uni_mark);
+            mUniMark = (ImageView) itemView.findViewById(R.id.uni_mark);
             mDate =(TextView) itemView.findViewById(R.id.main_date);
             mUniName = (TextView) itemView.findViewById(R.id.uni_name);
             mLike = (TextView) itemView.findViewById(R.id.like);
             mComment = (TextView) itemView.findViewById(R.id.comment);
             mBody = (TextView) itemView.findViewById(R.id.body);
+
         }
 
         public void bindMainItem(MainItem item){
             mItem = item;
-            //mUniMark.setImageResource(mItem.getUniMark());
+            mUniMark.setImageResource(mItem.getUniMark());
             mUniName.setText(mItem.getUniName());
             mLike.setText(mItem.getLike()+"");
             mComment.setText(mItem.getComment()+"");
@@ -78,7 +79,14 @@ public class MainFragment extends Fragment{
         public void onClick(View view){
             new GreenToast(getActivity()).showToast("선택됨!");
             Intent intent = new Intent(getActivity(), ContentActivity.class);
+            intent.putExtra("uniMark",mItem.getUniMark());
+            intent.putExtra("date",mItem.getDate());
+            intent.putExtra("uniName",mItem.getUniName());
+            intent.putExtra("like",mItem.getLike());
+            intent.putExtra("comment",mItem.getComment());
+            intent.putExtra("body",mItem.getBody());
             startActivity(intent);
+
         }
     }
 
@@ -87,6 +95,7 @@ public class MainFragment extends Fragment{
         public MainAdapter(List<MainItem> MainItems){
             for(int i=100000; i<110000; i++){
                 MainItem mainItem =new MainItem();
+                mainItem.setUniMark(R.drawable.stanford);
                 mainItem.setUniName("스탠포드대학교");
                 mainItem.setDate("2017년 2월 15일 오후 9:37");
                 mainItem.setLike(i-100);

@@ -1,40 +1,37 @@
 package com.example.sangh.soop.Model;
 
-import java.util.Date;
-import java.util.UUID;
-
 /**
- * Created by sangh on 2017-02-13.
+ * Created by sangh on 2017-02-17.
  */
 
-public class MainItem {
-    private int mUniMark;
-    private String mUniName;
+public class CommentItem {
+    private int mUserImg;
+    private String mUserName;
     private String mDate;
     private String mBody;
     private int mLike;
     private int mComment;
 
-    public String getUniName() {
-        return mUniName;
+    public int getUserImg() {
+        return mUserImg;
     }
 
-    public void setUniName(String uniName) {
-        mUniName = uniName;
+    public void setUserImg(int userImg) {
+        mUserImg = userImg;
+    }
+
+    public String getUserName() {
+        return mUserName;
+    }
+
+    public void setUserName(String userName) {
+        mUserName = userName;
     }
 
     public String getDate() {return mDate;}
 
     public void setDate(String date) {
         mDate = date;
-    }
-
-    public int getUniMark() {
-        return mUniMark;
-    }
-
-    public void setUniMark(int uniMark) {
-        mUniMark = uniMark;
     }
 
     public int getLike() {
@@ -59,5 +56,9 @@ public class MainItem {
 
     public void setBody(String body) {
         mBody = body;
+    }
+
+    public int getType(){
+        return 1;
     }
 }

@@ -95,7 +95,7 @@
 
             <LinearLayout
                 android:padding="2.5dp"
-                android:id="@+id/like_content"
+                android:id="@+id/like_linear"
                 android:layout_marginLeft="17.5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="23dp"
@@ -109,20 +109,20 @@
                     android:background="@drawable/like"/>
 
                 <TextView
+                    android:id="@+id/like_content"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="좋아요 100명"
-                    android:id="@+id/textView5"/>
+                    android:text="좋아요 100명"/>
             </LinearLayout>
 
             <LinearLayout
                 android:padding="2.5dp"
-                android:id="@+id/comment_content"
+                android:id="@+id/comment_linear"
                 android:layout_width="wrap_content"
                 android:layout_height="23dp"
                 android:background="#cbf4e0"
                 android:layout_marginRight="5dp"
-                android:layout_toLeftOf="@+id/share"
+                android:layout_toLeftOf="@+id/share_linear"
                 android:orientation="horizontal"
                 android:gravity="center">
 
@@ -132,6 +132,7 @@
                     android:background="@drawable/comment"/>
 
                 <TextView
+                    android:id="@+id/comment_content"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="댓글 20개"/>
@@ -139,7 +140,7 @@
 
             <LinearLayout
                 android:padding="2.5dp"
-                android:id="@+id/share"
+                android:id="@+id/share_linear"
                 android:layout_marginRight="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="23dp"
@@ -155,10 +156,10 @@
                     android:background="@drawable/share"/>
 
                 <TextView
+                    android:id="@+id/share_content"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="공유 20회"
-                    android:id="@+id/textView4"/>
+                    android:text="공유 20회"/>
             </LinearLayout>
 
         </RelativeLayout>

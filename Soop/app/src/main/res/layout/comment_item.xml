@@ -21,12 +21,12 @@
             android:orientation="horizontal">
 
             <ImageView
+                android:id="@+id/userImg_comment"
                 android:layout_width="37.5dp"
                 android:layout_height="37.5dp"
                 android:layout_marginLeft="12.5dp"
                 android:layout_marginRight="5dp"
-                android:src="@drawable/sulhyun"
-                android:id="@+id/imageView4"/>
+                android:src="@drawable/sulhyun"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -34,6 +34,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/userName_comment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="11dp"
@@ -42,6 +43,7 @@
                     android:text="김설현"/>
 
                 <TextView
+                    android:id="@+id/body_comment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -49,6 +51,7 @@
                     tools:text="스탠포드 가구씨뽀용 ~  ㅋㄷㅋㄷㅋㄷㅋㄷㅋㄷㅋㄷㅋㄷㅋㄷㅋㄷ  한국엔 항공대 미국엔 스탠포드!"/>
 
                 <TextView
+                    android:id="@+id/date_comment"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:textSize="10dp"
@@ -64,13 +67,12 @@
 
             <LinearLayout
                 android:padding="2.5dp"
-                android:id="@+id/like_comment"
                 android:layout_marginLeft="17.5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="23dp"
                 android:background="#cbf4e0"
                 android:orientation="horizontal"
-                android:layout_toLeftOf="@+id/comment_comment"
+                android:layout_toLeftOf="@+id/comment_linear"
                 android:layout_marginRight="5dp"
                 android:gravity="center">
 
@@ -80,16 +82,16 @@
                     android:background="@drawable/like"/>
 
                 <TextView
+                    android:id="@+id/like_comment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="좋아요 100명"
-                    android:textSize="12dp"
-                    android:id="@+id/textView5"/>
+                    android:textSize="12dp"/>
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/comment_linear"
                 android:padding="2.5dp"
-                android:id="@+id/comment_comment"
                 android:layout_width="wrap_content"
                 android:layout_height="23dp"
                 android:background="#cbf4e0"
@@ -104,6 +106,7 @@
                     android:background="@drawable/comment"/>
 
                 <TextView
+                    android:id="@+id/comment_comment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="12dp"

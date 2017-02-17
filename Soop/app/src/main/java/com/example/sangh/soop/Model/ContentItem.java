@@ -1,19 +1,21 @@
 package com.example.sangh.soop.Model;
 
-import java.util.Date;
-import java.util.UUID;
-
 /**
- * Created by sangh on 2017-02-13.
+ * Created by sangh on 2017-02-17.
  */
 
-public class MainItem {
+public class ContentItem {
+
     private int mUniMark;
     private String mUniName;
     private String mDate;
     private String mBody;
     private int mLike;
     private int mComment;
+    private int mShare;
+
+    public int getShare() { return mShare; }
+    public void setShare(int share) { mShare = share; }
 
     public String getUniName() {
         return mUniName;
@@ -60,4 +62,9 @@ public class MainItem {
     public void setBody(String body) {
         mBody = body;
     }
+
+    public int getType(){
+        return 0;
+    }
+
 }

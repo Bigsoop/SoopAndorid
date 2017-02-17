@@ -59,13 +59,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public class ListRow extends RecyclerView.ViewHolder{
-
-        public ListRow(View view){
-            super(view);
-        }
-    }
-
     private void makeDrawerMenu(){
 
         layout_drawer = (LinearLayout)navigationView.getHeaderView(0);

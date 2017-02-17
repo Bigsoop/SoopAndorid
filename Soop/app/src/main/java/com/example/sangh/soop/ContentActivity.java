@@ -1,14 +1,15 @@
 package com.example.sangh.soop;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
-import com.example.sangh.soop.Model.MainItem;
+import android.view.ViewGroup;
+import com.example.sangh.soop.Holder.BaseViewHolder;
+import com.example.sangh.soop.Holder.CommentHolder;
+import com.example.sangh.soop.Holder.ContentHolder;
 
 /**
  * Created by sangh on 2017-02-15.
@@ -17,8 +18,15 @@ import com.example.sangh.soop.Model.MainItem;
 public class ContentActivity extends AppCompatActivity{
     private Toolbar mToolbar;
     private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
+    private ContentAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+
+    int uniMark;
+    int comment ;
+    int like ;
+    String date;
+    String uniName;
+    String body;
 
     @Override
     protected void onCreate(Bundle savedSavedInstance){
@@ -33,38 +41,68 @@ public class ContentActivity extends AppCompatActivity{
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
+        mAdapter = new ContentAdapter();
+
+        Intent intent = getIntent();
+        uniMark =  intent.getExtras().getInt("uniMark");
+        comment =  intent.getExtras().getInt("comment");
+        like =  intent.getExtras().getInt("like");
+        date =  intent.getExtras().getString("date");
+        uniName =  intent.getExtras().getString("uniName");
+        body =  intent.getExtras().getString("body");
+
+        updateUI();
     }
 
-    private class ContentHolder extends RecyclerView.ViewHolder {
-        private MainItem mItem;
-        private ImageView mUniMark;
-        private TextView mDate;
-        private TextView mUniName;
-        private TextView mLike;
-        private TextView mComment;
-        private TextView mBody;
-
-        public ContentHolder(View itemView){
-            super(itemView);
-            //mUniMark = (ImageView) itemView.findViewById(R.id.uni_mark);
-            mDate =(TextView) itemView.findViewById(R.id.main_date);
-            mUniName = (TextView) itemView.findViewById(R.id.uni_name);
-            mLike = (TextView) itemView.findViewById(R.id.like);
-            mComment = (TextView) itemView.findViewById(R.id.comment);
-            mBody = (TextView) itemView.findViewById(R.id.body);
-        }
-
-        public void bindContentItem(MainItem item){
-            mItem = item;
-            //mUniMark.setImageResource(mItem.getUniMark());
-            mUniName.setText(mItem.getUniName());
-            mLike.setText(mItem.getLike()+"");
-            mComment.setText(mItem.getComment()+"");
-            mBody.setText(mItem.getBody());
-            mDate.setText(mItem.getDate());
-        }
-
+    private void updateUI(){
+        //mContentItems =new ArrayList<>();
+       // mAdapter = new ContentAdapter(mContentItems);
+       // mRecyclerView.setAdapter(mAdapter);
     }
+
+
+    public class ContentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+
+        public static final int VIEW_TYPE_CONTENT = 0;
+        public static final int VIEW_TYPE_COMMENT = 1;
+
+
+        @Override
+        public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            if (viewType == VIEW_TYPE_CONTENT) {
+                return CommentHolder.newInstance(parent);
+            } else {
+                return ContentHolder.newInstance(parent);
+            }
+        }
+
+        @Override
+        public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position){
+            switch (holder.getItemViewType()){
+                case VIEW_TYPE_CONTENT:
+                    ContentHolder ch = (ContentHolder) holder;
+
+                    break;
+                case VIEW_TYPE_COMMENT:
+                    CommentHolder cmh = (CommentHolder) holder;
+
+                    break;
+            }
+        }
+
+        @Override
+        public int getItemViewType(int position){
+            if(position==0) return VIEW_TYPE_CONTENT;
+            else return VIEW_TYPE_COMMENT;
+        }
+
+        @Override
+        public int getItemCount(){
+            return 0;
+        }
+    }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
