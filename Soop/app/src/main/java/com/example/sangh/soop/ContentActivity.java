@@ -13,7 +13,6 @@ import com.example.sangh.soop.Holder.ContentHolder;
 import com.example.sangh.soop.Model.CommentItem;
 import com.example.sangh.soop.Model.ContentItem;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by sangh on 2017-02-15.
@@ -23,7 +22,7 @@ public class ContentActivity extends AppCompatActivity {
     private Toolbar mToolbar;
     private RecyclerView mRecyclerView;
     private ContentAdapter mAdapter;
-    private List<CommentItem> mCommentItems;
+    private ArrayList mMultipleItems;
     int uniMark;
     int comment;
     int like;
@@ -56,13 +55,22 @@ public class ContentActivity extends AppCompatActivity {
     }
 
     private void updateUI() {
-
-        mAdapter = new ContentAdapter(mCommentItems);
+        mAdapter = new ContentAdapter(mMultipleItems);
         mRecyclerView.setAdapter(mAdapter);
     }
 
     private void DummyData() {
-        mCommentItems = new ArrayList<>();
+        mMultipleItems = new ArrayList();
+        ContentItem contentItem = new ContentItem();
+        contentItem.setUniMark(uniMark);
+        contentItem.setLike(like);
+        contentItem.setDate(date);
+        contentItem.setComment(comment);
+        contentItem.setUniName(uniName);
+        contentItem.setShare(20);
+        contentItem.setBody(body);
+        mMultipleItems.add(contentItem);
+
         for (int i = 0; i < 5; i++) {
             CommentItem commentItem = new CommentItem();
             commentItem.setUserImg(R.drawable.sulhyun);
@@ -72,7 +80,7 @@ public class ContentActivity extends AppCompatActivity {
             commentItem.setLike(i + 100);
             commentItem.setComment(i + 110);
             commentItem.setDate("2017년 2월 18일 오전 12:28");
-            mCommentItems.add(commentItem);
+            mMultipleItems.add(commentItem);
         }
     }
 
@@ -81,7 +89,8 @@ public class ContentActivity extends AppCompatActivity {
         public static final int VIEW_TYPE_CONTENT = 0;
         public static final int VIEW_TYPE_COMMENT = 1;
 
-        public ContentAdapter(List<CommentItem> commentItems) {}
+        public ContentAdapter(ArrayList MultipleItems) {
+        }
 
         @Override
         public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -94,24 +103,12 @@ public class ContentActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
-            switch (holder.getItemViewType()) {
-                case VIEW_TYPE_CONTENT:
-                    ContentHolder ch = (ContentHolder) holder;
-                    ContentItem contentItem = new ContentItem();
-                    contentItem.setLike(like);
-                    contentItem.setDate(date);
-                    contentItem.setComment(comment);
-                    contentItem.setUniName(uniName);
-                    contentItem.setShare(20);
-                    contentItem.setBody(body);
-                    ch.onBindView(contentItem);
-                    break;
-
-                case VIEW_TYPE_COMMENT:
-                    CommentHolder cmh = (CommentHolder) holder;
-                    CommentItem commentItem = mCommentItems.get(position);
-                    cmh.onBindView(commentItem);
-                    break;
+            if (holder.getItemViewType()==VIEW_TYPE_CONTENT) {
+                ContentItem contentItem = (ContentItem) mMultipleItems.get(position);
+                ((ContentHolder)holder).onBindView(contentItem);
+            } else {
+                CommentItem commentItem =(CommentItem)mMultipleItems.get(position);
+                ((CommentHolder)holder).onBindView(commentItem);
             }
         }
 
@@ -123,7 +120,7 @@ public class ContentActivity extends AppCompatActivity {
 
         @Override
         public int getItemCount() {
-            return 0;
+          return  mMultipleItems.size();
         }
     }
 
@@ -137,5 +134,6 @@ public class ContentActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 
 }
