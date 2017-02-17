@@ -58,7 +58,4 @@ public class CommentItem {
         mBody = body;
     }
 
-    public int getType(){
-        return 1;
-    }
 }

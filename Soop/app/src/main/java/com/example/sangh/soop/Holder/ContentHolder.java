@@ -4,9 +4,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.example.sangh.soop.Model.ContentItem;
-import com.example.sangh.soop.Model.MainItem;
 import com.example.sangh.soop.R;
 
 /**
@@ -47,6 +45,7 @@ public class ContentHolder extends BaseViewHolder<ContentItem>{
             mUniName.setText(mItem.getUniName());
             mLike.setText(mItem.getLike()+"");
             mComment.setText(mItem.getComment()+"");
+            mShare.setText(mItem.getShare()+"");
             mBody.setText(mItem.getBody());
             mDate.setText(mItem.getDate());
         }

@@ -34,14 +34,29 @@ public class MainFragment extends Fragment{
         View v = inflater.inflate(R.layout.fragment_main, container, false);
         mMainRecyclerView = (RecyclerView) v.findViewById(R.id.fragment_main);
         mMainRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        dummyData();
         updateUI();
         return v;
     }
 
     private void updateUI(){
-        mMainItems =new ArrayList<>();
         mAdapter = new MainAdapter(mMainItems);
         mMainRecyclerView.setAdapter(mAdapter);
+    }
+
+    private void dummyData(){
+        mMainItems =new ArrayList<>();
+        for(int i=100000; i<110000; i++){
+            MainItem mainItem =new MainItem();
+            mainItem.setUniMark(R.drawable.stanford);
+            mainItem.setUniName("스탠포드대학교");
+            mainItem.setDate("2017년 2월 15일 오후 9:37");
+            mainItem.setLike(i-100);
+            mainItem.setComment(i-100);
+            mainItem.setBody("우리학교 솔직히 지잡대아님? 자꾸 세계 1류 대학인척 하는데 무슨 소리인지 모르겠다는 것은 사실 페이크였고 우리학교는 세계 최고의 대학교인건 솔직히" +
+                    "ㅇㅈ? ㄹㅇㅍㅌ ?? ㅂㅂㅂㄱ?? ㅇㅇ ㅇㅇㅈ");
+            mMainItems.add(mainItem);
+        }
     }
 
     private class MainHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -65,7 +80,7 @@ public class MainFragment extends Fragment{
 
         }
 
-        public void bindMainItem(MainItem item){
+        public void onBindView(MainItem item){
             mItem = item;
             mUniMark.setImageResource(mItem.getUniMark());
             mUniName.setText(mItem.getUniName());
@@ -93,17 +108,7 @@ public class MainFragment extends Fragment{
     private class MainAdapter extends RecyclerView.Adapter<MainHolder>{
 
         public MainAdapter(List<MainItem> MainItems){
-            for(int i=100000; i<110000; i++){
-                MainItem mainItem =new MainItem();
-                mainItem.setUniMark(R.drawable.stanford);
-                mainItem.setUniName("스탠포드대학교");
-                mainItem.setDate("2017년 2월 15일 오후 9:37");
-                mainItem.setLike(i-100);
-                mainItem.setComment(i-100);
-                mainItem.setBody("우리학교 솔직히 지잡대아님? 자꾸 세계 1류 대학인척 하는데 무슨 소리인지 모르겠다는 것은 사실 페이크였고 우리학교는 세계 최고의 대학교인건 솔직히" +
-                        "ㅇㅈ? ㄹㅇㅍㅌ ?? ㅂㅂㅂㄱ?? ㅇㅇ ㅇㅇㅈ");
-                MainItems.add(mainItem);
-            }
+
         }
 
         @Override
@@ -116,7 +121,7 @@ public class MainFragment extends Fragment{
         @Override
         public void onBindViewHolder(MainHolder holder, int position){
             MainItem mainItem = mMainItems.get(position);
-            holder.bindMainItem(mainItem);
+            holder.onBindView(mainItem);
         }
 
         @Override

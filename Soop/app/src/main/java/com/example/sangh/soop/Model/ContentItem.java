@@ -63,8 +63,4 @@ public class ContentItem {
         mBody = body;
     }
 
-    public int getType(){
-        return 0;
-    }
-
 }
