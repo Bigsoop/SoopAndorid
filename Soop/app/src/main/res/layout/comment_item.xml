@@ -48,12 +48,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
                     android:textSize="12dp"
+                    android:layout_marginTop="5dp"
                     tools:text="스탠포드 가구씨뽀용 ~  ㅋㄷㅋㄷㅋㄷㅋㄷㅋㄷㅋㄷㅋㄷㅋㄷㅋㄷ  한국엔 항공대 미국엔 스탠포드!"/>
 
                 <TextView
                     android:id="@+id/date_comment"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:textSize="10dp"
                     tools:text="2017년 2월 15일 오전 12:21"/>
 
@@ -86,7 +87,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="좋아요 100명"
-                    android:textSize="12dp"/>
+                    android:textSize="10dp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -100,6 +101,7 @@
                 android:layout_alignParentRight="true"
                 android:gravity="center">
 
+
                 <ImageView
                     android:layout_width="12.5dp"
                     android:layout_height="12.5dp"
@@ -109,9 +111,12 @@
                     android:id="@+id/comment_comment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="12dp"
+                    android:textSize="10dp"
                     android:text="댓글 20개"/>
             </LinearLayout>
+
+
+
         </RelativeLayout>
     </LinearLayout>
 </android.support.v7.widget.CardView>

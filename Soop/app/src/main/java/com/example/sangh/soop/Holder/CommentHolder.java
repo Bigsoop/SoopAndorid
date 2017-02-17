@@ -41,8 +41,8 @@ public class CommentHolder extends BaseViewHolder<CommentItem>{
         mItem = item;
         mUserImg.setImageResource(mItem.getUserImg());
         mUserName.setText(mItem.getUserName());
-        mLike.setText(mItem.getLike()+"");
-        mComment.setText(mItem.getComment()+"");
+        mLike.setText("좋아요 "+mItem.getLike()+"명");
+        mComment.setText("댓글 "+mItem.getComment()+"개");
         mBody.setText(mItem.getBody());
         mDate.setText(mItem.getDate());
     }

@@ -112,6 +112,7 @@
                     android:id="@+id/like_content"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="10dp"
                     android:text="좋아요 100명"/>
             </LinearLayout>
 
@@ -135,6 +136,7 @@
                     android:id="@+id/comment_content"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="10dp"
                     android:text="댓글 20개"/>
             </LinearLayout>
 
@@ -159,6 +161,7 @@
                     android:id="@+id/share_content"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="10dp"
                     android:text="공유 20회"/>
             </LinearLayout>
 

@@ -53,8 +53,9 @@ public class MainFragment extends Fragment{
             mainItem.setDate("2017년 2월 15일 오후 9:37");
             mainItem.setLike(i-100);
             mainItem.setComment(i-100);
-            mainItem.setBody("우리학교 솔직히 지잡대아님? 자꾸 세계 1류 대학인척 하는데 무슨 소리인지 모르겠다는 것은 사실 페이크였고 우리학교는 세계 최고의 대학교인건 솔직히" +
-                    "ㅇㅈ? ㄹㅇㅍㅌ ?? ㅂㅂㅂㄱ?? ㅇㅇ ㅇㅇㅈ");
+            mainItem.setBody("우리학교 솔직히 지잡대아님? 자꾸 세계 1류 대학인척 하는데 무슨 소리인지 모르겠다는 것은 사실 페이크였고 우리학교는 세계 최고의 대학교인건 솔직히"
+                   + "ㅇㅈ? ㄹㅇㅍㅌ ?? ㅂㅂㅂㄱ?? ㅇㅇ ㅇㅇㅈ우리학교 솔직히 지잡대아님? 자꾸 세계 1류 대학인척 하는데 무슨 소리인지 모르겠다는 것은 사실 페이크였고 우리학교는 세계 최고의 대학교인건 솔직히 "
+                    +"ㅇㅈ? ㄹㅇㅍㅌ ?? ㅂㅂㅂㄱ?? ㅇㅇ ㅇㅇㅈ");
             mMainItems.add(mainItem);
         }
     }
@@ -107,9 +108,7 @@ public class MainFragment extends Fragment{
 
     private class MainAdapter extends RecyclerView.Adapter<MainHolder>{
 
-        public MainAdapter(List<MainItem> MainItems){
-
-        }
+        public MainAdapter(List<MainItem> MainItems){}
 
         @Override
         public MainHolder onCreateViewHolder(ViewGroup parent, int viewType){

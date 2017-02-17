@@ -12,7 +12,10 @@ import com.example.sangh.soop.Holder.CommentHolder;
 import com.example.sangh.soop.Holder.ContentHolder;
 import com.example.sangh.soop.Model.CommentItem;
 import com.example.sangh.soop.Model.ContentItem;
+import com.example.sangh.soop.Model.MainItem;;
+
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by sangh on 2017-02-15.
@@ -22,7 +25,7 @@ public class ContentActivity extends AppCompatActivity {
     private Toolbar mToolbar;
     private RecyclerView mRecyclerView;
     private ContentAdapter mAdapter;
-    private ArrayList mMultipleItems;
+    private List<MainItem> mMultipleItems;
     int uniMark;
     int comment;
     int like;
@@ -89,15 +92,15 @@ public class ContentActivity extends AppCompatActivity {
         public static final int VIEW_TYPE_CONTENT = 0;
         public static final int VIEW_TYPE_COMMENT = 1;
 
-        public ContentAdapter(ArrayList MultipleItems) {
+        public ContentAdapter(List<MainItem> MultipleItems) {
         }
 
         @Override
         public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             if (viewType == VIEW_TYPE_CONTENT) {
-                return CommentHolder.newInstance(parent);
-            } else {
                 return ContentHolder.newInstance(parent);
+            } else {
+                return CommentHolder.newInstance(parent);
             }
         }
 
@@ -105,10 +108,14 @@ public class ContentActivity extends AppCompatActivity {
         public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
             if (holder.getItemViewType()==VIEW_TYPE_CONTENT) {
                 ContentItem contentItem = (ContentItem) mMultipleItems.get(position);
-                ((ContentHolder)holder).onBindView(contentItem);
+                if(holder instanceof ContentHolder){
+                    ((ContentHolder) holder).onBindView(contentItem);
+                }
             } else {
                 CommentItem commentItem =(CommentItem)mMultipleItems.get(position);
-                ((CommentHolder)holder).onBindView(commentItem);
+                if(holder instanceof CommentHolder) {
+                    ((CommentHolder) holder).onBindView(commentItem);
+                }
             }
         }
 
