@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.sangh.soop.Adapter.MainAdapter;
 import com.example.sangh.soop.ContentActivity;
 import com.example.sangh.soop.Holder.MainHolder;
 import com.example.sangh.soop.Model.MainItem;
@@ -24,7 +26,7 @@ import java.util.List;
 public class MainFragment extends Fragment{
     private RecyclerView mMainRecyclerView;
     private MainAdapter mAdapter;
-    public  List<MainItem> mMainItems;
+    public  ArrayList<MainItem> mMainItems;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -41,7 +43,7 @@ public class MainFragment extends Fragment{
     }
 
     private void updateUI(){
-        mAdapter = new MainAdapter(mMainItems);
+        mAdapter = new MainAdapter(getContext(),mMainItems);
         mMainRecyclerView.setAdapter(mAdapter);
     }
 
@@ -63,26 +65,4 @@ public class MainFragment extends Fragment{
 
 
 
-    private class MainAdapter extends RecyclerView.Adapter<MainHolder>{
-
-        public MainAdapter(List<MainItem> MainItems){}
-
-        @Override
-        public MainHolder onCreateViewHolder(ViewGroup parent, int viewType){
-            LayoutInflater layoutInflater =LayoutInflater.from(getActivity());
-            View view =layoutInflater.inflate(R.layout.main_item, parent, false);
-            return new MainHolder(view,getContext());
-        }
-
-        @Override
-        public void onBindViewHolder(MainHolder holder, int position){
-            MainItem mainItem = mMainItems.get(position);
-            holder.onBindView(mainItem);
-        }
-
-        @Override
-        public int getItemCount(){
-            return mMainItems.size();
-        }
-    }
 }
