@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
         drawableMenu.get(Constant.MENU_INFO).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new GreenToast(getApplicationContext()).showToast("info clicked");
+                startActivity(new Intent(MainActivity.this, AppInfoActivity.class));
             }
         });
 
