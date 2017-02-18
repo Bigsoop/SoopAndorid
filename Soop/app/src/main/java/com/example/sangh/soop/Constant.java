@@ -6,6 +6,8 @@ package com.example.sangh.soop;
 
 public class Constant {
 
+    public static final String ADMIN_EMAIL ="asdfasdf@naver.com";
+
     public static final int MENU_MAIN = 0;
     public static final int MENU_SEARCH = 1;
     public static final int MENU_MAIL = 2;

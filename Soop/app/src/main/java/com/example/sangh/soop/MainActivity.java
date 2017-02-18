@@ -1,6 +1,7 @@
 package com.example.sangh.soop;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -86,7 +87,8 @@ public class MainActivity extends AppCompatActivity {
         drawableMenu.get(Constant.MENU_MAIL).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new GreenToast(getApplicationContext()).showToast("Mail clicked");
+                Uri uri = Uri.parse("mailto:"+Constant.ADMIN_EMAIL);
+                startActivity(new Intent(Intent.ACTION_SENDTO,uri));
             }
         });
 
