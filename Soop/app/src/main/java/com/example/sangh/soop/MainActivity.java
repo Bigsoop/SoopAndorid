@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         drawableMenu.get(Constant.MENU_SEARCH).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new GreenToast(getApplicationContext()).showToast("search clicked");
+                startActivity(new Intent(MainActivity.this,BestActivity.class));
             }
         });
 

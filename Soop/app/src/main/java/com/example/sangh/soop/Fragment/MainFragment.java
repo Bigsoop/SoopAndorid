@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.sangh.soop.ContentActivity;
+import com.example.sangh.soop.Holder.MainHolder;
 import com.example.sangh.soop.Model.MainItem;
 import com.example.sangh.soop.R;
 import com.example.sangh.soop.view.GreenToast;
@@ -60,51 +61,7 @@ public class MainFragment extends Fragment{
         }
     }
 
-    private class MainHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        private MainItem mItem;
-        private ImageView mUniMark;
-        private TextView mDate;
-        private TextView mUniName;
-        private TextView mLike;
-        private TextView mComment;
-        private TextView mBody;
 
-        public MainHolder(View itemView){
-            super(itemView);
-            itemView.setOnClickListener(this);
-            mUniMark = (ImageView) itemView.findViewById(R.id.uni_mark);
-            mDate =(TextView) itemView.findViewById(R.id.main_date);
-            mUniName = (TextView) itemView.findViewById(R.id.uni_name);
-            mLike = (TextView) itemView.findViewById(R.id.like);
-            mComment = (TextView) itemView.findViewById(R.id.comment);
-            mBody = (TextView) itemView.findViewById(R.id.body);
-
-        }
-
-        public void onBindView(MainItem item){
-            mItem = item;
-            mUniMark.setImageResource(mItem.getUniMark());
-            mUniName.setText(mItem.getUniName());
-            mLike.setText(mItem.getLike()+"");
-            mComment.setText(mItem.getComment()+"");
-            mBody.setText(mItem.getBody());
-            mDate.setText(mItem.getDate());
-        }
-
-        @Override
-        public void onClick(View view){
-            new GreenToast(getActivity()).showToast("선택됨!");
-            Intent intent = new Intent(getActivity(), ContentActivity.class);
-            intent.putExtra("uniMark",mItem.getUniMark());
-            intent.putExtra("date",mItem.getDate());
-            intent.putExtra("uniName",mItem.getUniName());
-            intent.putExtra("like",mItem.getLike());
-            intent.putExtra("comment",mItem.getComment());
-            intent.putExtra("body",mItem.getBody());
-            startActivity(intent);
-
-        }
-    }
 
     private class MainAdapter extends RecyclerView.Adapter<MainHolder>{
 
@@ -114,7 +71,7 @@ public class MainFragment extends Fragment{
         public MainHolder onCreateViewHolder(ViewGroup parent, int viewType){
             LayoutInflater layoutInflater =LayoutInflater.from(getActivity());
             View view =layoutInflater.inflate(R.layout.main_item, parent, false);
-            return new MainHolder(view);
+            return new MainHolder(view,getContext());
         }
 
         @Override
