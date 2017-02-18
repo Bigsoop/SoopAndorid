@@ -1,5 +1,6 @@
 package com.example.sangh.soop;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -92,8 +93,7 @@ public class MainActivity extends AppCompatActivity {
         drawableMenu.get(Constant.MENU_SETTING).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new GreenToast(getApplicationContext()).showToast("setting clicked");
-
+                startActivity(new Intent(MainActivity.this, SettingActivity.class));
             }
         });
         drawableMenu.get(Constant.MENU_INFO).setOnClickListener(new View.OnClickListener() {

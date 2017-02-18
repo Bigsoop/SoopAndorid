@@ -10,10 +10,24 @@
         <item name="windowNoTitle">true</item>
 
     </style>
-    <style name="AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
-    <style name="PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+    <style name="AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
+    <style name="PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="SoopSwitch" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- active thumb & track color (30% transparency) -->
+        <item name="colorControlActivated">#00b55e</item>
+
+        <!-- inactive thumb color -->
+        <item name="colorSwitchThumbNormal">#ffffff</item>
+
+        <!-- inactive track color (30% transparency) -->
+        <item name="android:colorForeground">#000000</item>
+    </style>
 
 </resources>
