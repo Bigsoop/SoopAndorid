@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         drawableMenu.get(Constant.MENU_MAIN).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new GreenToast(getApplicationContext()).showToast("Main clicked");
+                drawer.closeDrawer(GravityCompat.START);
             }
         });
 
