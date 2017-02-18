@@ -82,7 +82,8 @@
     <LinearLayout
         android:id="@+id/comment_update"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:minHeight="45dp"
+        android:layout_height="wrap_content"
         android:background="#cbf4e0"
         android:orientation="horizontal"
         android:gravity="center"
@@ -94,8 +95,14 @@
             android:layout_weight="20"/>
 
         <EditText
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:layout_width="0dp"
-            android:layout_height="35dp"
+            android:minHeight="35dp"
+            android:maxHeight="100dp"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:background="#ffffff"
             android:layout_weight="1140"
             android:hint="   댓글을 입력해주세요. ^0^"
