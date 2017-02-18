@@ -58,7 +58,7 @@ public class ContentActivity extends AppCompatActivity {
     }
 
     private void updateUI() {
-        mAdapter = new ContentAdapter(mMultipleItems);
+        mAdapter = new ContentAdapter();
         mRecyclerView.setAdapter(mAdapter);
     }
 
@@ -92,7 +92,8 @@ public class ContentActivity extends AppCompatActivity {
         public static final int VIEW_TYPE_CONTENT = 0;
         public static final int VIEW_TYPE_COMMENT = 1;
 
-        public ContentAdapter(List<MainItem> MultipleItems) {
+        public ContentAdapter() {
+
         }
 
         @Override
@@ -141,6 +142,4 @@ public class ContentActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-
 }
