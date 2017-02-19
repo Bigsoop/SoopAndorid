@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
         layout_drawer = (LinearLayout)navigationView.getHeaderView(0);
         drawableMenu = new ArrayList<>();
         for(int i=0; i<Constant.menuNameList.length;i++){
+            if(Constant.menuNameList[i].equals("로그아웃") && !User.getIsLogin(this)) continue;
             drawableMenu.add(new DrawerItem(this,Constant.menuIconList[i],Constant.menuNameList[i]));
             layout_drawer.addView(drawableMenu.get(i));
         }
@@ -77,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        drawableMenu.get(Constant.MENU_SEARCH).setOnClickListener(new View.OnClickListener() {
+        drawableMenu.get(Constant.MENU_BEST).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this,BestActivity.class));
@@ -104,6 +105,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, AppInfoActivity.class));
             }
         });
+        if(drawableMenu.size() >=6){
+            drawableMenu.get(Constant.MENU_LOGOUT).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //TODO : 로그아웃 구현..!
+                    new GreenToast(MainActivity.this).showToast("로그아웃버튼");
+                }
+            });
+        }
 
     }
 
