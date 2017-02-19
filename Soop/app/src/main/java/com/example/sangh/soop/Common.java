@@ -5,16 +5,18 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
+import com.facebook.Profile;
+
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 /**
  * Created by koohanmo on 2017-02-19.
  */
 
 public class Common {
-
-
-
-
 
 
     public static Intent getFacebookIntent(Context context, Uri uri) {
@@ -28,7 +30,25 @@ public class Common {
         }
         catch (PackageManager.NameNotFoundException ignored) {
         }
-
         return new Intent(Intent.ACTION_VIEW, uri);
+    }
+
+    public static void setCircleImage(Context context, String url, ImageView img){
+        try {
+            Glide.with(context).load(url)
+                    .bitmapTransform(new CropCircleTransformation(Glide.get(context).getBitmapPool()))
+                    .into(img);
+        }catch (Exception e){
+            AppLog.e("CircleImage", "Context Error");
+        }
+    }
+    public static void setCircleImage(Context context, Uri uri, ImageView img){
+        try {
+            Glide.with(context).load(uri)
+                    .bitmapTransform(new CropCircleTransformation(Glide.get(context).getBitmapPool()))
+                    .into(img);
+        }catch (Exception e){
+            AppLog.e("CircleImage", "Context Error");
+        }
     }
 }

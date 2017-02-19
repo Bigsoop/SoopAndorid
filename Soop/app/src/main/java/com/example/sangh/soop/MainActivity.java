@@ -122,9 +122,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void setProfileUpdate(){
         if(Profile.getCurrentProfile().getProfilePictureUri(500,500)!=null)
-            Glide.with(this).load(Profile.getCurrentProfile().getProfilePictureUri(500,500))
-                    .bitmapTransform(new CropCircleTransformation(Glide.get(this).getBitmapPool()))
-                    .into(img_Profile);
+            Common.setCircleImage(this,Profile.getCurrentProfile().getProfilePictureUri(500,500),img_Profile);
+
         img_Profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
