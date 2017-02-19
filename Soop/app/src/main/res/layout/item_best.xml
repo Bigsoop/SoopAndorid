@@ -96,26 +96,19 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="190"/>
-
-                <TextView
-
                     android:id="@+id/body"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1080"
                     android:textSize="12dp"
+                    android:maxLines="20"
+                    android:ellipsize="end"
                     tools:text="우리학교 솔직히 지잡대아님? 자꾸 세계 1류 대학인척 하는데 무슨 소리인지 모르겠다는 것은 사실 페이크였고 우리학교는 세계 최고의 대학교인건 솔직히ㅇㅈ? ㄹㅇㅍㅌ ?? ㅂㅂㅂㄱ?? ㅇㅇ ㅇㅇㅈ"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="50"/>
 
             </LinearLayout>
 

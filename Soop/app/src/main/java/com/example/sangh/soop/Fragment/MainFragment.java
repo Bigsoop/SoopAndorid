@@ -65,6 +65,17 @@ public class MainFragment extends Fragment{
             }
         });
 
+        mHandler = new Handler(new Handler.Callback() {
+            @Override
+            public boolean handleMessage(Message msg) {
+                switch (msg.what){
+                    case 0: mAdapter.notifyDataSetChanged(); break;
+                    case 1: new GreenToast(getActivity()).showToast("네트워크 연결 상태를 확인해주세요"); break;
+                }
+                return false;
+            }
+        });
+
         mMainRecyclerView = (RecyclerView) v.findViewById(R.id.fragment_main);
         mMainRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mMainRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -88,16 +99,7 @@ public class MainFragment extends Fragment{
             }
         });
 
-        mHandler = new Handler(new Handler.Callback() {
-            @Override
-            public boolean handleMessage(Message msg) {
-                switch (msg.what){
-                    case 0: mAdapter.notifyDataSetChanged(); break;
-                    case 1: new GreenToast(getActivity()).showToast("네트워크 연결 상태를 확인해주세요"); break;
-                }
-                return false;
-            }
-        });
+
         requestMainData(lastTime);
         updateUI();
         return v;

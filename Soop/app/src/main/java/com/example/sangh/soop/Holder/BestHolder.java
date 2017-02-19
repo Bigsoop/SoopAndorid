@@ -5,6 +5,7 @@ import android.graphics.Typeface;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.sangh.soop.Model.MainItem;
 import com.example.sangh.soop.R;
 
 /**
@@ -14,10 +15,12 @@ import com.example.sangh.soop.R;
 public class BestHolder extends MainHolder {
 
     private TextView txt_best_idx;
+    private TextView share;
 
     public BestHolder(View itemView, Context mcon) {
         super(itemView, mcon);
         txt_best_idx = (TextView) itemView.findViewById(R.id.txt_best_idx);
+        share = (TextView) itemView.findViewById(R.id.share);
     }
 
     public void setRank(int idx){
@@ -28,4 +31,17 @@ public class BestHolder extends MainHolder {
     public void setTypeFace(Typeface ty){
         txt_best_idx.setTypeface(ty);
     }
+
+    @Override
+    public void onBindView(MainItem item){
+        mItem = item;
+        if(mItem.getUniMark()!=0)mUniMark.setImageResource(mItem.getUniMark());
+        mUniName.setText(mItem.getUniName());
+        mLike.setText(" 좋아요 "+mItem.getLike()+"개");
+        mComment.setText(" 댓글 "+mItem.getComment()+"개");
+        share.setText(" 공유 "+mItem.getmShare()+"회");
+        mBody.setText(mItem.getBody());
+        mDate.setText(mItem.getDate());
+    }
+
 }

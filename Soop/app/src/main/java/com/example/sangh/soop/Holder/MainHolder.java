@@ -17,13 +17,13 @@ import com.example.sangh.soop.view.GreenToast;
  */
 
 public class MainHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-    private MainItem mItem;
-    private ImageView mUniMark;
-    private TextView mDate;
-    private TextView mUniName;
-    private TextView mLike;
-    private TextView mComment;
-    private TextView mBody;
+    protected MainItem mItem;
+    protected ImageView mUniMark;
+    protected TextView mDate;
+    protected TextView mUniName;
+    protected TextView mLike;
+    protected TextView mComment;
+    protected TextView mBody;
 
     private Context mcon;
 

@@ -1,5 +1,7 @@
 package com.example.sangh.soop;
 
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,14 +12,29 @@ import android.view.MenuItem;
 import com.example.sangh.soop.Adapter.BestAdapter;
 import com.example.sangh.soop.Model.ContentItem;
 import com.example.sangh.soop.Model.MainItem;
+import com.example.sangh.soop.view.GreenToast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 public class BestActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    ArrayList<MainItem> dataSet;
+    ArrayList<MainItem> dataSet = new ArrayList<>();
     BestAdapter bestAdapter;
+    private final String TAG = "BestActivity";
+    private Handler mHandler;
+    private final int MSG_DATACHANGE =0;
+    private final int MSG_ERR_TOAST = 1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +46,19 @@ public class BestActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Best");
 
-        dummyData();
+        mHandler = new Handler(new Handler.Callback() {
+            @Override
+            public boolean handleMessage(Message msg) {
+                switch (msg.what){
+                    case 0: bestAdapter.notifyDataSetChanged(); break;
+                    case 1: new GreenToast(getApplicationContext()).showToast("네트워크 연결 상태를 확인해주세요"); break;
+                }
+                return false;
+            }
+        });
+
         initView();
-
-
+        requestBestData("");
     }
 
     private void initView(){
@@ -43,21 +69,6 @@ public class BestActivity extends AppCompatActivity {
 
     }
 
-    private void dummyData(){
-        dataSet =new ArrayList<>();
-        for(int i=100000; i<110000; i++){
-            MainItem mainItem =new MainItem();
-            mainItem.setUniMark(R.drawable.stanford);
-            mainItem.setUniName("하바드대학교");
-            mainItem.setDate("2017년 2월 15일 오후 9:37");
-            mainItem.setLike(i-100);
-            mainItem.setComment(i-100);
-            mainItem.setBody("우리학교 솔직히 지잡대아님? 자꾸 세계 1류 대학인척 하는데 무슨 소리인지 모르겠다는 것은 사실 페이크였고 우리학교는 세계 최고의 대학교인건 솔직히"
-                    + "ㅇㅈ? ㄹㅇㅍㅌ ?? ㅂㅂㅂㄱ?? ㅇㅇ ㅇㅇㅈ우리학교 솔직히 지잡대아님? 자꾸 세계 1류 대학인척 하는데 무슨 소리인지 모르겠다는 것은 사실 페이크였고 우리학교는 세계 최고의 대학교인건 솔직히 "
-                    +"ㅇㅈ? ㄹㅇㅍㅌ ?? ㅂㅂㅂㄱ?? ㅇㅇ ㅇㅇㅈ");
-            dataSet.add(mainItem);
-        }
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -66,4 +77,38 @@ public class BestActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    private void requestBestData(String Best){
+        try {
+            NetworkRequests.getInstance().getAriticle(Constant.BEST, "", new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    mHandler.sendEmptyMessage(MSG_ERR_TOAST);
+                }
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    AppLog.i(TAG,"RESPONSE");
+                    try {
+                        JSONArray responseJson = new JSONArray(response.body().string());
+                        for(int i=0; i<responseJson.length(); i++){
+                            JSONObject cur = responseJson.getJSONObject(i);
+                            MainItem mainItem = new MainItem();
+                            if(!mainItem.setJsonObject(cur)) continue;
+                            dataSet.add(mainItem);
+
+                        }
+                        AppLog.i(TAG, responseJson.toString());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        mHandler.sendEmptyMessage(MSG_ERR_TOAST);
+                    }
+                    mHandler.sendEmptyMessage(0);
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+            mHandler.sendEmptyMessage(MSG_ERR_TOAST);
+        }
+    }
+
 }
