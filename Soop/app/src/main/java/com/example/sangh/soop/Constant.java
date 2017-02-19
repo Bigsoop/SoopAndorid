@@ -18,5 +18,9 @@ public class Constant {
 
     public static final String[] menuNameList = {"메 인", "베스트","문 의","설 정","앱정보","로그아웃"};
     public static final int[] menuIconList = {R.drawable.selector_ic_home,R.drawable.selector_ic_best,R.drawable.selector_ic_mail,R.drawable.selector_ic_setting,R.drawable.selector_ic_info,R.drawable.selector_ic_logout};
-    
+
+
+    public static final String DOMAIN ="http://192.168.0.12/";
+    public static final String MAIN =DOMAIN+"soo/week.php";
+
 }

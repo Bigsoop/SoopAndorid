@@ -42,7 +42,7 @@ public class MainHolder extends RecyclerView.ViewHolder implements View.OnClickL
 
     public void onBindView(MainItem item){
         mItem = item;
-        mUniMark.setImageResource(mItem.getUniMark());
+        if(mItem.getUniMark()!=0)mUniMark.setImageResource(mItem.getUniMark());
         mUniName.setText(mItem.getUniName());
         mLike.setText(mItem.getLike()+"");
         mComment.setText(mItem.getComment()+"");
@@ -52,7 +52,6 @@ public class MainHolder extends RecyclerView.ViewHolder implements View.OnClickL
 
     @Override
     public void onClick(View view){
-        new GreenToast(mcon).showToast("선택됨!");
         Intent intent = new Intent(mcon, ContentActivity.class);
         intent.putExtra("uniMark",mItem.getUniMark());
         intent.putExtra("date",mItem.getDate());
@@ -60,6 +59,7 @@ public class MainHolder extends RecyclerView.ViewHolder implements View.OnClickL
         intent.putExtra("like",mItem.getLike());
         intent.putExtra("comment",mItem.getComment());
         intent.putExtra("body",mItem.getBody());
+        intent.putExtra("share",mItem.getmShare());
         mcon.startActivity(intent);
     }
 }

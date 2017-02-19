@@ -1,32 +1,51 @@
 package com.example.sangh.soop.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-
 import com.example.sangh.soop.Adapter.MainAdapter;
-import com.example.sangh.soop.ContentActivity;
-import com.example.sangh.soop.Holder.MainHolder;
+import com.example.sangh.soop.AppLog;
+import com.example.sangh.soop.Constant;
 import com.example.sangh.soop.Model.MainItem;
+import com.example.sangh.soop.NetworkRequests;
 import com.example.sangh.soop.R;
 import com.example.sangh.soop.view.GreenToast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 /**
  * Created by sangh on 2017-02-13.
  */
 
 public class MainFragment extends Fragment{
+
+    private final String TAG = "MainFragment";
+
     private RecyclerView mMainRecyclerView;
     private MainAdapter mAdapter;
-    public  ArrayList<MainItem> mMainItems;
+    private ArrayList<MainItem> mMainItems=new ArrayList<>();;
+
+    private Handler mHandler;
+    private final int MSG_DATACHANGE =0;
+    private final int MSG_ERR_TOAST = 1;
+
+    private boolean requireUpdate = true;
+    private String lastTime = "2030-1-1 12:00";
+
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -37,7 +56,39 @@ public class MainFragment extends Fragment{
         View v = inflater.inflate(R.layout.fragment_main, container, false);
         mMainRecyclerView = (RecyclerView) v.findViewById(R.id.fragment_main);
         mMainRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        dummyData();
+
+        mMainRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+            }
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+
+                int offset = recyclerView.computeVerticalScrollOffset();
+                int extent = recyclerView.computeVerticalScrollExtent();
+                int range = recyclerView.computeVerticalScrollRange();
+
+                if(range-offset < extent*3 && requireUpdate){
+                    requestMainData(lastTime);
+                }
+            }
+        });
+
+        mHandler = new Handler(new Handler.Callback() {
+            @Override
+            public boolean handleMessage(Message msg) {
+                switch (msg.what){
+                    case 0: mAdapter.notifyDataSetChanged(); break;
+                    case 1: new GreenToast(getActivity()).showToast("네트워크 연결 상태를 확인해주세요"); break;
+                }
+                return false;
+            }
+        });
+        requestMainData(lastTime);
         updateUI();
         return v;
     }
@@ -47,22 +98,42 @@ public class MainFragment extends Fragment{
         mMainRecyclerView.setAdapter(mAdapter);
     }
 
-    private void dummyData(){
-        mMainItems =new ArrayList<>();
-        for(int i=100000; i<110000; i++){
-            MainItem mainItem =new MainItem();
-            mainItem.setUniMark(R.drawable.stanford);
-            mainItem.setUniName("스탠포드대학교");
-            mainItem.setDate("2017년 2월 15일 오후 9:37");
-            mainItem.setLike(i-100);
-            mainItem.setComment(i-100);
-            mainItem.setBody("우리학교 솔직히 지잡대아님? 자꾸 세계 1류 대학인척 하는데 무슨 소리인지 모르겠다는 것은 사실 페이크였고 우리학교는 세계 최고의 대학교인건 솔직히"
-                   + "ㅇㅈ? ㄹㅇㅍㅌ ?? ㅂㅂㅂㄱ?? ㅇㅇ ㅇㅇㅈ우리학교 솔직히 지잡대아님? 자꾸 세계 1류 대학인척 하는데 무슨 소리인지 모르겠다는 것은 사실 페이크였고 우리학교는 세계 최고의 대학교인건 솔직히 "
-                    +"ㅇㅈ? ㄹㅇㅍㅌ ?? ㅂㅂㅂㄱ?? ㅇㅇ ㅇㅇㅈ");
-            mMainItems.add(mainItem);
+
+    private void requestMainData(String date){
+        if(!requireUpdate) return;
+        requireUpdate=false;
+        try {
+            NetworkRequests.getInstance().getAriticle(Constant.MAIN, date, new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    mHandler.sendEmptyMessage(MSG_ERR_TOAST);
+                    requireUpdate=true;
+                }
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    AppLog.i(TAG,"RESPONSE");
+                    try {
+                        JSONArray responseJson = new JSONArray(response.body().string());
+                        for(int i=0; i<responseJson.length(); i++){
+                            JSONObject cur = responseJson.getJSONObject(i);
+                            MainItem mainItem = new MainItem();
+                            if(!mainItem.setJsonObject(cur)) continue;
+                            mMainItems.add(mainItem);
+                            if(i== responseJson.length()-1) lastTime=mainItem.getDate();
+                        }
+                        AppLog.i(TAG, responseJson.toString());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        mHandler.sendEmptyMessage(MSG_ERR_TOAST);
+                    }
+                    requireUpdate=true;
+                    mHandler.sendEmptyMessage(0);
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+            mHandler.sendEmptyMessage(MSG_ERR_TOAST);
+            requireUpdate=true;
         }
     }
-
-
-
 }

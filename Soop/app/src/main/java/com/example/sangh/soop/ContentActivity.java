@@ -29,6 +29,7 @@ public class ContentActivity extends AppCompatActivity {
     int uniMark;
     int comment;
     int like;
+    int share;
     String date;
     String uniName;
     String body;
@@ -52,6 +53,7 @@ public class ContentActivity extends AppCompatActivity {
         date = intent.getExtras().getString("date");
         uniName = intent.getExtras().getString("uniName");
         body = intent.getExtras().getString("body");
+        share = intent.getExtras().getInt("share");
 
         DummyData();
         updateUI();
@@ -70,7 +72,7 @@ public class ContentActivity extends AppCompatActivity {
         contentItem.setDate(date);
         contentItem.setComment(comment);
         contentItem.setUniName(uniName);
-        contentItem.setShare(20);
+        contentItem.setShare(share);
         contentItem.setBody(body);
         mMultipleItems.add(contentItem);
 

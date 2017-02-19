@@ -1,5 +1,8 @@
 package com.example.sangh.soop.Model;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Date;
 import java.util.UUID;
 
@@ -8,12 +11,33 @@ import java.util.UUID;
  */
 
 public class MainItem {
+
+    private String id;
     private int mUniMark;
     private String mUniName;
     private String mDate;
     private String mBody;
     private int mLike;
+    private int mShare;
     private int mComment;
+
+    public MainItem(){}
+
+    public boolean setJsonObject(JSONObject jsonObject){
+        try {
+            this.setId(jsonObject.getString("id"));
+            this.setLike(Integer.parseInt(jsonObject.getString("likes")));
+            this.setComment(Integer.parseInt(jsonObject.getString("comments")));
+            this.setmShare(Integer.parseInt(jsonObject.getString("comments")));
+            this.setmDate(jsonObject.getString("created_time"));
+            this.setUniName(jsonObject.getString("univName"));
+            this.setBody(jsonObject.getString("message").trim());
+            return true;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
     public String getUniName() {
         return mUniName;
@@ -59,5 +83,28 @@ public class MainItem {
 
     public void setBody(String body) {
         mBody = body;
+    }
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public int getmShare() {
+        return mShare;
+    }
+
+    public void setmShare(int mShare) {
+        this.mShare = mShare;
+    }
+
+    public String getmDate() {
+        return mDate;
+    }
+
+    public void setmDate(String mDate) {
+        this.mDate = mDate;
     }
 }
