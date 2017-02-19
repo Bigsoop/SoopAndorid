@@ -49,6 +49,7 @@ public class Common {
                     .into(img);
         }catch (Exception e){
             AppLog.e("CircleImage", "Context Error");
+
         }
     }
 }
