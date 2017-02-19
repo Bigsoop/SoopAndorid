@@ -1,5 +1,6 @@
 package com.example.sangh.soop;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,10 +10,18 @@ import com.example.sangh.soop.view.GreenToast;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.Profile;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
+import org.json.JSONObject;
+
 public class IntroLoginActivity extends AppCompatActivity {
+    private final String TAG ="IntroLoginActivity";
+
     Button startBtn;
     LoginButton mLoginButton;
     CallbackManager callbackManager;
@@ -28,24 +37,30 @@ public class IntroLoginActivity extends AppCompatActivity {
             hd.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    startActivity(new Intent(IntroLoginActivity.this, MainActivity.class));
+                    Intent intent = new Intent(IntroLoginActivity.this, MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    finish();
                 }
-            }, 3000);
+            }, 1500);
         }
 
         else {
             setContentView(R.layout.activity_intro_login);
             callbackManager = CallbackManager.Factory.create();
             mLoginButton = (LoginButton) findViewById(R.id.login_button);
-            mLoginButton.setReadPermissions("email");
+            mLoginButton.setReadPermissions("public_profile");
             mLoginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
                 @Override
                 public void onSuccess(LoginResult loginResult) {
+                    AppLog.i(TAG,loginResult+"");
                     String accessToken = loginResult.getAccessToken().toString();
                     new GreenToast(getApplicationContext()).showToast("Success " + accessToken);
                     Intent intent = new Intent(IntroLoginActivity.this, MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    User.setIsLogin(getApplicationContext(),true);
                     startActivity(intent);
-
+                    finish();
                 }
                 @Override
                 public void onCancel() {

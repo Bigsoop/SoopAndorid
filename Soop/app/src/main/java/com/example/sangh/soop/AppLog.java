@@ -8,7 +8,7 @@ import android.util.Log;
 
 public class AppLog {
 
-    public static boolean DEBUG = false;
+    public static boolean DEBUG = true;
 
     public static final void e(String TAG, String msg){
         if(DEBUG) Log.e(TAG,msg);
