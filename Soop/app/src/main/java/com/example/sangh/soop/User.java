@@ -1,7 +1,7 @@
 package com.example.sangh.soop;
 
-import android.content.Context;
-import android.content.SharedPreferences;
+        import android.content.Context;
+        import android.content.SharedPreferences;
 
 /**
  * Created by koohanmo on 2017-02-19.

@@ -3,6 +3,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -36,6 +37,7 @@ public class MainFragment extends Fragment{
     private final String TAG = "MainFragment";
 
     private RecyclerView mMainRecyclerView;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
     private MainAdapter mAdapter;
     private ArrayList<MainItem> mMainItems=new ArrayList<>();;
 
@@ -54,9 +56,17 @@ public class MainFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_main, container, false);
+
+        mSwipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.main_swipe_layout);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
         mMainRecyclerView = (RecyclerView) v.findViewById(R.id.fragment_main);
         mMainRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
         mMainRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
             @Override

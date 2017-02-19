@@ -100,14 +100,10 @@
 
         </RelativeLayout>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="150"
             android:orientation="horizontal">
 
@@ -117,13 +113,12 @@
                 android:layout_weight="190"/>
 
             <TextView
-
                 android:id="@+id/body"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1080"
                 android:textSize="13dp"
-                android:maxLines="4"
+                android:maxLines="8"
                 android:ellipsize="end"
                 tools:text="우리학교 솔직히 지잡대아님? 자꾸 세계 1류 대학 인척하는데 왜그러는지 "/>
 

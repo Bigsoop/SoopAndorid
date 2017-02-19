@@ -1,6 +1,5 @@
 package com.example.sangh.soop;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,14 +9,8 @@ import com.example.sangh.soop.view.GreenToast;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
-import com.facebook.Profile;
-import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-
-import org.json.JSONObject;
 
 public class IntroLoginActivity extends AppCompatActivity {
     private final String TAG ="IntroLoginActivity";
@@ -37,10 +30,7 @@ public class IntroLoginActivity extends AppCompatActivity {
             hd.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    Intent intent = new Intent(IntroLoginActivity.this, MainActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
-                    finish();
+                    startActivity(new Intent(IntroLoginActivity.this, MainActivity.class));
                 }
             }, 1500);
         }
