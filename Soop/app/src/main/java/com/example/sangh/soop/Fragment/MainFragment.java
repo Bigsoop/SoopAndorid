@@ -16,14 +16,11 @@ import com.example.sangh.soop.Model.MainItem;
 import com.example.sangh.soop.NetworkRequests;
 import com.example.sangh.soop.R;
 import com.example.sangh.soop.view.GreenToast;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
 import java.util.ArrayList;
-
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;

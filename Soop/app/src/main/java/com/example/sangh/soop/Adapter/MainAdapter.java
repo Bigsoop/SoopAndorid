@@ -5,13 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.example.sangh.soop.Holder.MainHolder;
 import com.example.sangh.soop.Model.MainItem;
 import com.example.sangh.soop.R;
-
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by koohanmo on 2017-02-19.

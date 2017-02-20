@@ -97,9 +97,9 @@
                 <ImageView
                     android:layout_width="12.5dp"
                     android:layout_height="12.5dp"
-                    android:background="@drawable/like"/>
+                    android:background="@drawable/like"></ImageView>
 
-                <TextView
+               <TextView
                     android:id="@+id/like_content"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

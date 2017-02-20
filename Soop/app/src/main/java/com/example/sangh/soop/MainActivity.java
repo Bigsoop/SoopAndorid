@@ -17,7 +17,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import com.bumptech.glide.Glide;
 import com.example.sangh.soop.Fragment.MainFragment;
 import com.example.sangh.soop.view.DrawerItem;
 import com.example.sangh.soop.view.GreenToast;
@@ -28,8 +27,6 @@ import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 import org.json.JSONObject;
 import java.util.ArrayList;
-import jp.wasabeef.glide.transformations.CropCircleTransformation;
-
 
 public class MainActivity extends AppCompatActivity {
     private final String TAG="MainActivity";

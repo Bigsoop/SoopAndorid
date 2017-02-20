@@ -1,16 +1,13 @@
 package com.example.sangh.soop.Holder;
-
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.example.sangh.soop.ContentActivity;
 import com.example.sangh.soop.Model.MainItem;
 import com.example.sangh.soop.R;
-import com.example.sangh.soop.view.GreenToast;
 
 /**
  * Created by koohanmo on 2017-02-19.
@@ -53,6 +50,7 @@ public class MainHolder extends RecyclerView.ViewHolder implements View.OnClickL
     @Override
     public void onClick(View view){
         Intent intent = new Intent(mcon, ContentActivity.class);
+        intent.putExtra("id",mItem.getId());
         intent.putExtra("uniMark",mItem.getUniMark());
         intent.putExtra("date",mItem.getDate());
         intent.putExtra("uniName",mItem.getUniName());

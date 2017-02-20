@@ -6,14 +6,24 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import com.example.sangh.soop.Holder.BaseViewHolder;
 import com.example.sangh.soop.Holder.CommentHolder;
 import com.example.sangh.soop.Holder.ContentHolder;
 import com.example.sangh.soop.Model.CommentItem;
 import com.example.sangh.soop.Model.ContentItem;
-import com.example.sangh.soop.Model.MainItem;;
-
+import com.example.sangh.soop.Model.MainItem;
+import com.example.sangh.soop.view.GreenToast;
+import com.facebook.AccessToken;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,17 +32,22 @@ import java.util.List;
  */
 
 public class ContentActivity extends AppCompatActivity {
+    private final String TAG ="ContentActivity";
     private Toolbar mToolbar;
     private RecyclerView mRecyclerView;
     private ContentAdapter mAdapter;
     private List<MainItem> mMultipleItems;
+
     int uniMark;
     int comment;
     int like;
     int share;
+    String id;
     String date;
     String uniName;
     String body;
+    Button inputCommentBtn;
+    EditText editComment;
 
     @Override
     protected void onCreate(Bundle savedSavedInstance) {
@@ -47,6 +62,7 @@ public class ContentActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
         Intent intent = getIntent();
+        id = intent.getExtras().getString("id");
         uniMark = intent.getExtras().getInt("uniMark");
         comment = intent.getExtras().getInt("comment");
         like = intent.getExtras().getInt("like");
@@ -55,8 +71,36 @@ public class ContentActivity extends AppCompatActivity {
         body = intent.getExtras().getString("body");
         share = intent.getExtras().getInt("share");
 
+
         DummyData();
         updateUI();
+
+
+        editComment =(EditText)findViewById(R.id.editText);
+        inputCommentBtn = (Button) findViewById(R.id.input_comment_btn);
+        inputCommentBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String text = editComment.getText().toString();
+                if(text.length()==0) return;
+                Bundle params = new Bundle();
+                params.putString("message", text);
+                new GraphRequest(
+                        AccessToken.getCurrentAccessToken(),
+                        "/"+ id + "/comments",
+                        params,
+                        HttpMethod.POST,
+                        new GraphRequest.Callback() {
+                            public void onCompleted(GraphResponse response) {
+                                new GreenToast(getApplicationContext()).showToast("댓글이 등록되었습니다.");
+                                //AppLog.i(TAG,  "/"+ id + "/comments"
+                            }
+                        }
+                ).executeAsync();
+
+                editComment.setText("");
+            }
+        });
     }
 
     private void updateUI() {
@@ -66,7 +110,8 @@ public class ContentActivity extends AppCompatActivity {
 
     private void DummyData() {
         mMultipleItems = new ArrayList();
-        ContentItem contentItem = new ContentItem();
+        final ContentItem contentItem = new ContentItem();
+        contentItem.setId(id);
         contentItem.setUniMark(uniMark);
         contentItem.setLike(like);
         contentItem.setDate(date);
@@ -76,17 +121,37 @@ public class ContentActivity extends AppCompatActivity {
         contentItem.setBody(body);
         mMultipleItems.add(contentItem);
 
-        for (int i = 0; i < 5; i++) {
-            CommentItem commentItem = new CommentItem();
-            commentItem.setUserImg(R.drawable.sulhyun);
-            commentItem.setUserName("김설현");
-            commentItem.setBody("스탠포드 가구씨보용 ~ ㅋㄷㅋㄷㅋㄷㅋㄷㅋㄷㅋㄷㅋㄷㅋㄷ 한국엔 항공대" +
-                    "미국엔 스탠포드!");
-            commentItem.setLike(i + 100);
-            commentItem.setComment(i + 110);
-            commentItem.setDate("2017년 2월 18일 오전 12:28");
-            mMultipleItems.add(commentItem);
-        }
+        new GraphRequest(
+                AccessToken.getCurrentAccessToken(),
+                "/" + id + "/comments",
+                null,
+                HttpMethod.GET,
+                new GraphRequest.Callback() {
+                    public void onCompleted(GraphResponse response) {
+                        try {
+                            JSONObject jo= response.getJSONObject();
+                            AppLog.i(TAG,jo.toString());
+                            JSONArray ja = jo.getJSONArray("data");
+                            for(int i=0; i<ja.length(); i++){
+                                CommentItem commentItem = new CommentItem();
+                                JSONObject cur = ja.getJSONObject(i);
+                                JSONObject from = cur.getJSONObject("from");
+                                commentItem.setUserImg(R.drawable.sulhyun);
+                                commentItem.setLike(i + 100);
+                                commentItem.setComment(i + 110);
+                                commentItem.setUserName(from.getString("name"));
+                                commentItem.setId(cur.getString("id"));
+                                commentItem.setDate(cur.getString("created_time"));
+                                commentItem.setBody(cur.getString("message"));
+                                mMultipleItems.add(commentItem);
+                            }
+                            mAdapter.notifyDataSetChanged();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+        ).executeAsync();
     }
 
     public class ContentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {

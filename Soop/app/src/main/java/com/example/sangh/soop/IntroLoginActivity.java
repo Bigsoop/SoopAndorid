@@ -11,6 +11,7 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import java.util.Arrays;
 
 public class IntroLoginActivity extends AppCompatActivity {
     private final String TAG ="IntroLoginActivity";
@@ -39,13 +40,11 @@ public class IntroLoginActivity extends AppCompatActivity {
             setContentView(R.layout.activity_intro_login);
             callbackManager = CallbackManager.Factory.create();
             mLoginButton = (LoginButton) findViewById(R.id.login_button);
-            mLoginButton.setReadPermissions("public_profile");
+            mLoginButton.setReadPermissions(Arrays.asList("public_profile,publish_pages,publish_actions"));
             mLoginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
                 @Override
                 public void onSuccess(LoginResult loginResult) {
                     AppLog.i(TAG,loginResult+"");
-                    String accessToken = loginResult.getAccessToken().toString();
-                    new GreenToast(getApplicationContext()).showToast("Success " + accessToken);
                     Intent intent = new Intent(IntroLoginActivity.this, MainActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                     User.setIsLogin(getApplicationContext(),true);
@@ -73,7 +72,6 @@ public class IntroLoginActivity extends AppCompatActivity {
             });
         }
     }
-
 
 
     @Override

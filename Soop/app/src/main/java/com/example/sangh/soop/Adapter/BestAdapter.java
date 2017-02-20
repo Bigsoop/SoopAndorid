@@ -6,10 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.example.sangh.soop.Holder.BestHolder;
-import com.example.sangh.soop.Holder.MainHolder;
-import com.example.sangh.soop.Model.ContentItem;
 import com.example.sangh.soop.Model.MainItem;
 import com.example.sangh.soop.R;
 

@@ -20,8 +20,7 @@ public class Constant {
     public static final int[] menuIconList = {R.drawable.selector_ic_home,R.drawable.selector_ic_best,R.drawable.selector_ic_mail,R.drawable.selector_ic_setting,R.drawable.selector_ic_info,R.drawable.selector_ic_logout};
 
 
-    public static final String DOMAIN ="http://192.168.0.12/";
-    public static final String MAIN = DOMAIN+"soo/main.php";
-    public static final String BEST = DOMAIN+"soo/best.php";
-
+    public static final String DOMAIN ="http://130.211.204.198/";
+    public static final String MAIN = DOMAIN+"main.php";
+    public static final String BEST = DOMAIN+"best.php";
 }

@@ -8,19 +8,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-
 import com.example.sangh.soop.Adapter.BestAdapter;
-import com.example.sangh.soop.Model.ContentItem;
 import com.example.sangh.soop.Model.MainItem;
 import com.example.sangh.soop.view.GreenToast;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
 import java.util.ArrayList;
-
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
