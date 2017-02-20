@@ -1,4 +1,5 @@
 package com.example.sangh.soop;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -32,12 +33,13 @@ import java.util.List;
  */
 
 public class ContentActivity extends AppCompatActivity {
+
     private final String TAG ="ContentActivity";
     private Toolbar mToolbar;
     private RecyclerView mRecyclerView;
     private ContentAdapter mAdapter;
     private List<MainItem> mMultipleItems;
-
+    private Context mContext;
     int uniMark;
     int comment;
     int like;
@@ -53,7 +55,7 @@ public class ContentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedSavedInstance) {
         super.onCreate(savedSavedInstance);
         setContentView(R.layout.activity_content);
-
+        mContext=getApplicationContext();
         mToolbar = (Toolbar) findViewById(R.id.toolbar_content);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -72,7 +74,7 @@ public class ContentActivity extends AppCompatActivity {
         share = intent.getExtras().getInt("share");
 
 
-        DummyData();
+        inputData();
         updateUI();
 
 
@@ -108,7 +110,7 @@ public class ContentActivity extends AppCompatActivity {
         mRecyclerView.setAdapter(mAdapter);
     }
 
-    private void DummyData() {
+    private void inputData() {
         mMultipleItems = new ArrayList();
         final ContentItem contentItem = new ContentItem();
         contentItem.setId(id);
@@ -121,38 +123,77 @@ public class ContentActivity extends AppCompatActivity {
         contentItem.setBody(body);
         mMultipleItems.add(contentItem);
 
-        new GraphRequest(
-                AccessToken.getCurrentAccessToken(),
-                "/" + id + "/comments",
-                null,
-                HttpMethod.GET,
-                new GraphRequest.Callback() {
-                    public void onCompleted(GraphResponse response) {
-                        try {
-                            JSONObject jo= response.getJSONObject();
-                            AppLog.i(TAG,jo.toString());
-                            JSONArray ja = jo.getJSONArray("data");
-                            for(int i=0; i<ja.length(); i++){
-                                CommentItem commentItem = new CommentItem();
-                                JSONObject cur = ja.getJSONObject(i);
-                                JSONObject from = cur.getJSONObject("from");
-                                commentItem.setUserImg(R.drawable.sulhyun);
-                                commentItem.setLike(i + 100);
-                                commentItem.setComment(i + 110);
-                                commentItem.setUserName(from.getString("name"));
-                                commentItem.setId(cur.getString("id"));
-                                commentItem.setDate(cur.getString("created_time"));
-                                commentItem.setBody(cur.getString("message"));
-                                mMultipleItems.add(commentItem);
+            new GraphRequest(
+                    AccessToken.getCurrentAccessToken(),
+                    "/" + id + "/comments",
+                    null,
+                    HttpMethod.GET,
+                    new GraphRequest.Callback() {
+                        public void onCompleted(GraphResponse response) {
+                            try {
+                                JSONObject jo= response.getJSONObject();
+                                AppLog.i(TAG,jo.toString());
+                                JSONArray ja = jo.getJSONArray("data");
+
+                                for(int i=0; i<ja.length(); i++){
+                                    final CommentItem commentItem = new CommentItem();
+                                    JSONObject cur = ja.getJSONObject(i);
+                                    JSONObject from = cur.getJSONObject("from");
+                                    commentItem.setUserId(from.getString("id"));
+                                    commentItem.setUserName(from.getString("name"));
+                                    commentItem.setId(cur.getString("id"));
+                                    commentItem.setDate(cur.getString("created_time"));
+                                    commentItem.setBody(cur.getString("message"));
+
+                                    new GraphRequest(
+                                            AccessToken.getCurrentAccessToken(),
+                                            "/" + commentItem.getId()+ "?fields=like_count,comment_count",
+                                            null,
+                                            HttpMethod.GET,
+                                            new GraphRequest.Callback() {
+                                                public void onCompleted(GraphResponse response) {
+                                                    try{
+                                                        JSONObject like_comment_count = response.getJSONObject();
+                                                        commentItem.setLike(Integer.parseInt(like_comment_count.getString("like_count")));
+                                                        commentItem.setComment(Integer.parseInt(like_comment_count.getString("comment_count")));
+                                                    }catch (JSONException e){
+                                                        e.printStackTrace();
+                                                    }
+                                                }
+                                            }
+                                    ).executeAsync();
+
+                                    new GraphRequest(
+                                            AccessToken.getCurrentAccessToken(),
+                                            "/" + commentItem.getUserId()+"/picture?redirect=false",
+                                            null,
+                                            HttpMethod.GET,
+                                            new GraphRequest.Callback() {
+                                                public void onCompleted(GraphResponse response) {
+                                                    try{
+                                                        AppLog.i(TAG,"/" + commentItem.getUserId()+"/picture");
+                                                        JSONObject userImg = response.getJSONObject();
+                                                        JSONObject data = userImg.getJSONObject("data");
+                                                        commentItem.setUserImg(data.getString("url"));
+                                                    }catch (JSONException e){
+                                                        e.printStackTrace();
+                                                    }
+                                                }
+                                            }
+                                    ).executeAsync();
+
+                                    mMultipleItems.add(commentItem);
+                                }
+                                mAdapter.notifyDataSetChanged();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-                            mAdapter.notifyDataSetChanged();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
                         }
                     }
-                }
-        ).executeAsync();
+            ).executeAsync();
     }
+
+
 
     public class ContentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -160,15 +201,14 @@ public class ContentActivity extends AppCompatActivity {
         public static final int VIEW_TYPE_COMMENT = 1;
 
         public ContentAdapter() {
-
         }
 
         @Override
         public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             if (viewType == VIEW_TYPE_CONTENT) {
-                return ContentHolder.newInstance(parent);
+                return ContentHolder.newInstance(mContext,parent);
             } else {
-                return CommentHolder.newInstance(parent);
+                return CommentHolder.newInstance(mContext, parent);
             }
         }
 

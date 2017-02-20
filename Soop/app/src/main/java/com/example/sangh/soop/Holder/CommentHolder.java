@@ -1,18 +1,28 @@
 package com.example.sangh.soop.Holder;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.example.sangh.soop.CommentActivity;
+import com.example.sangh.soop.Common;
+import com.example.sangh.soop.ContentActivity;
 import com.example.sangh.soop.Model.CommentItem;
 import com.example.sangh.soop.R;
+import com.facebook.Profile;
 
 /**
  * Created by sangh on 2017-02-16.
  */
 
 public class CommentHolder extends BaseViewHolder<CommentItem>{
-
+    private Context mCon;
     private CommentItem mItem;
     private ImageView mUserImg;
     private TextView mUserName;
@@ -20,30 +30,63 @@ public class CommentHolder extends BaseViewHolder<CommentItem>{
     private TextView mLike;
     private TextView mComment;
     private TextView mBody;
+    private LinearLayout commentBtn;
+    private LinearLayout likeBtn;
 
-    public static CommentHolder newInstance(ViewGroup parent){
+    public static CommentHolder newInstance(Context con,ViewGroup parent){
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.comment_item, parent, false);
-        return new CommentHolder(itemView);
+        return new CommentHolder(con,itemView);
     }
 
-    public CommentHolder(View itemView){
+    public CommentHolder(Context con,View itemView) {
         super(itemView);
+        this.mCon = con;
         mUserImg = (ImageView) itemView.findViewById(R.id.userImg_comment);
         mUserName = (TextView) itemView.findViewById(R.id.userName_comment);
         mDate =(TextView) itemView.findViewById(R.id.date_comment);
         mLike = (TextView) itemView.findViewById(R.id.like_comment);
         mComment = (TextView) itemView.findViewById(R.id.comment_comment);
         mBody = (TextView) itemView.findViewById(R.id.body_comment);
+        commentBtn = (LinearLayout) itemView.findViewById(R.id.comment_linear);
+        likeBtn =(LinearLayout)itemView.findViewById(R.id.like_linear);
     }
 
-    public void onBindView(CommentItem item){
+
+    public void onBindView(CommentItem item) {
         mItem = item;
-        mUserImg.setImageResource(mItem.getUserImg());
         mUserName.setText(mItem.getUserName());
-        mLike.setText("좋아요 "+mItem.getLike()+"명");
-        mComment.setText(" 댓글 "+mItem.getComment()+"개");
+        mLike.setText(" 좋아요 " + mItem.getLike() + "명");
+        mComment.setText(" 댓글 " + mItem.getComment() + "개");
         mBody.setText(mItem.getBody());
         mDate.setText(mItem.getDate());
+        Common.setCircleImage(mCon, mItem.getUserImg(), mUserImg);
+
+        mUserImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i =Common.getFacebookIntent(mCon , Uri.parse("https://www.facebook.com/app_scoped_user_id/"+mItem.getUserId()+"/"));
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                mCon.startActivity(i);
+            }
+        });
+
+        commentBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mCon, CommentActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mCon.startActivity(intent);
+            }
+        });
+
+        likeBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                 mLike.setText(" 좋아요 "+ (mItem.getLike()+1) +"명");
+            }
+        });
+
     }
+
 }

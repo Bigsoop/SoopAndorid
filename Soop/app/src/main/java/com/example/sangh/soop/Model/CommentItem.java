@@ -1,18 +1,30 @@
 package com.example.sangh.soop.Model;
 
+import java.net.URI;
+import java.net.URL;
+
 /**
  * Created by sangh on 2017-02-17.
  */
 
 public class CommentItem extends MainItem{
-    private int mUserImg;
     private String mUserName;
+    private String mUserId;
+    private String mUserImg;
 
-    public int getUserImg() {
+    public String getUserImg() {
         return mUserImg;
     }
 
-    public void setUserImg(int userImg) {
+    public String getUserId() {
+        return mUserId;
+    }
+
+    public void setUserId(String userId) {
+        mUserId = userId;
+    }
+
+    public void setUserImg(String userImg) {
         mUserImg = userImg;
     }
 

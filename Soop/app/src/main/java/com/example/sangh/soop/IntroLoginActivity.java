@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import com.example.sangh.soop.view.GreenToast;
+import com.facebook.AccessToken;
+import com.facebook.AccessTokenSource;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -40,8 +42,9 @@ public class IntroLoginActivity extends AppCompatActivity {
             setContentView(R.layout.activity_intro_login);
             callbackManager = CallbackManager.Factory.create();
             mLoginButton = (LoginButton) findViewById(R.id.login_button);
-            mLoginButton.setReadPermissions(Arrays.asList("public_profile,publish_pages,publish_actions"));
+            mLoginButton.setReadPermissions(Arrays.asList("public_profile,manage_pages,publish_pages,publish_actions,user_events"));
             mLoginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+
                 @Override
                 public void onSuccess(LoginResult loginResult) {
                     AppLog.i(TAG,loginResult+"");

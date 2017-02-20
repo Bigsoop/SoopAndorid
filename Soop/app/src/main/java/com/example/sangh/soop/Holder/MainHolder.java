@@ -21,7 +21,6 @@ public class MainHolder extends RecyclerView.ViewHolder implements View.OnClickL
     protected TextView mLike;
     protected TextView mComment;
     protected TextView mBody;
-
     private Context mcon;
 
     public MainHolder(View itemView, Context mcon){
