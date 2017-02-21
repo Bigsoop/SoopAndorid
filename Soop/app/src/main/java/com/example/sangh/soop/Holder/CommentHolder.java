@@ -1,7 +1,6 @@
 package com.example.sangh.soop.Holder;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,13 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
+import com.example.sangh.soop.R;
 import com.example.sangh.soop.CommentActivity;
 import com.example.sangh.soop.Common;
-import com.example.sangh.soop.ContentActivity;
 import com.example.sangh.soop.Model.CommentItem;
-import com.example.sangh.soop.R;
-import com.facebook.Profile;
+
 
 /**
  * Created by sangh on 2017-02-16.
@@ -36,6 +33,19 @@ public class CommentHolder extends BaseViewHolder<CommentItem>{
     public static CommentHolder newInstance(Context con,ViewGroup parent){
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.comment_item, parent, false);
+        return new CommentHolder(con,itemView);
+    }
+
+    public static CommentHolder newInstance2(Context con,ViewGroup parent){
+        View itemView = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.comment_item_color, parent, false);
+        return new CommentHolder(con,itemView);
+    }
+
+
+    public static CommentHolder newInstance3(Context con,ViewGroup parent){
+        View itemView = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.comment_comment_item, parent, false);
         return new CommentHolder(con,itemView);
     }
 
@@ -74,9 +84,19 @@ public class CommentHolder extends BaseViewHolder<CommentItem>{
         commentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mCon, CommentActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                mCon.startActivity(intent);
+                if(mItem.getComment()!=0) {
+                    Intent intent = new Intent(mCon, CommentActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.putExtra("commentId", mItem.getId());
+                    intent.putExtra("commentLike", mItem.getLike());
+                    intent.putExtra("commentComment", mItem.getComment());
+                    intent.putExtra("commentCreateTime", mItem.getDate());
+                    intent.putExtra("commentUserImg", mItem.getUserImg());
+                    intent.putExtra("commentBody", mItem.getBody());
+                    intent.putExtra("commentUserId", mItem.getUserId());
+                    intent.putExtra("commentUserName", mItem.getUserName());
+                    mCon.startActivity(intent);
+                }
             }
         });
 

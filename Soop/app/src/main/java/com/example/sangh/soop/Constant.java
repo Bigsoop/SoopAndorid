@@ -16,7 +16,7 @@ public class Constant {
     public static final int MENU_LOGOUT = 5;
 
 
-    public static final String[] menuNameList = {"메   인", "베스트 50","문   의","설   정","앱정보","로그아웃"};
+    public static final String[] menuNameList = {"메   인", "베스트","문   의","설   정","앱정보","로그아웃"};
     public static final int[] menuIconList = {R.drawable.selector_ic_home,R.drawable.selector_ic_best,R.drawable.selector_ic_mail,R.drawable.selector_ic_setting,R.drawable.selector_ic_info,R.drawable.selector_ic_logout};
 
 

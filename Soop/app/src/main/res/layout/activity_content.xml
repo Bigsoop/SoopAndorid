@@ -18,11 +18,6 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="32"/>
-
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar_content"
             android:layout_width="match_parent"
@@ -32,39 +27,8 @@
             app:contentInsetLeft="0dp"
             app:contentInsetStart="0dp"
             app:contentInsetStartWithNavigation="0dp"
-            app:popupTheme="@style/PopupOverlay"
-            >
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="400"/>
-
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_weight="280"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/logo"
-                    android:id="@+id/imageView3"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="516"
-                    />
-            </LinearLayout>
-
+            app:popupTheme="@style/PopupOverlay">
         </android.support.v7.widget.Toolbar>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="32"/>
 
     </android.support.design.widget.AppBarLayout>
 

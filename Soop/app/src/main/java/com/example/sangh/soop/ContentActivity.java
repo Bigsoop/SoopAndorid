@@ -57,8 +57,6 @@ public class ContentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_content);
         mContext=getApplicationContext();
         mToolbar = (Toolbar) findViewById(R.id.toolbar_content);
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.content_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -73,6 +71,9 @@ public class ContentActivity extends AppCompatActivity {
         body = intent.getExtras().getString("body");
         share = intent.getExtras().getInt("share");
 
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(uniName+" 대나무숲");
 
         inputData();
         updateUI();

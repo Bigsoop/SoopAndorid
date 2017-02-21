@@ -37,6 +37,7 @@ public class Common {
         try {
             Glide.with(context).load(url)
                     .bitmapTransform(new CropCircleTransformation(Glide.get(context).getBitmapPool()))
+                    .placeholder(R.drawable.profile_image)
                     .into(img);
         }catch (Exception e){
             AppLog.e("CircleImage", "Context Error");
