@@ -73,7 +73,7 @@ public class ContentActivity extends AppCompatActivity {
 
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(uniName+" 대나무숲");
+        getSupportActionBar().setTitle(uniName+" 대나무숲의 글");
 
         inputData();
         updateUI();
@@ -126,7 +126,7 @@ public class ContentActivity extends AppCompatActivity {
 
             new GraphRequest(
                     AccessToken.getCurrentAccessToken(),
-                    "/" + id + "/comments",
+                    "/" + id + "/comments?fields=like_count,comment_count,message,created_time,user_likes,from",
                     null,
                     HttpMethod.GET,
                     new GraphRequest.Callback() {
@@ -145,24 +145,8 @@ public class ContentActivity extends AppCompatActivity {
                                     commentItem.setId(cur.getString("id"));
                                     commentItem.setDate(cur.getString("created_time"));
                                     commentItem.setBody(cur.getString("message"));
-
-                                    new GraphRequest(
-                                            AccessToken.getCurrentAccessToken(),
-                                            "/" + commentItem.getId()+ "?fields=like_count,comment_count",
-                                            null,
-                                            HttpMethod.GET,
-                                            new GraphRequest.Callback() {
-                                                public void onCompleted(GraphResponse response) {
-                                                    try{
-                                                        JSONObject like_comment_count = response.getJSONObject();
-                                                        commentItem.setLike(Integer.parseInt(like_comment_count.getString("like_count")));
-                                                        commentItem.setComment(Integer.parseInt(like_comment_count.getString("comment_count")));
-                                                    }catch (JSONException e){
-                                                        e.printStackTrace();
-                                                    }
-                                                }
-                                            }
-                                    ).executeAsync();
+                                    commentItem.setLike(Integer.parseInt(cur.getString("like_count")));
+                                    commentItem.setComment(Integer.parseInt(cur.getString("comment_count")));
 
                                     new GraphRequest(
                                             AccessToken.getCurrentAccessToken(),
@@ -193,7 +177,6 @@ public class ContentActivity extends AppCompatActivity {
                     }
             ).executeAsync();
     }
-
 
 
     public class ContentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {

@@ -125,7 +125,7 @@ public class CommentActivity extends AppCompatActivity {
 
         new GraphRequest(
                 AccessToken.getCurrentAccessToken(),
-                "/" + commentId + "/comments",
+                "/" + commentId + "/comments?fields=like_count,comment_count,message,created_time,user_likes,from",
                 null,
                 HttpMethod.GET,
                 new GraphRequest.Callback() {
@@ -144,24 +144,8 @@ public class CommentActivity extends AppCompatActivity {
                                 commentItem.setId(cur.getString("id"));
                                 commentItem.setDate(cur.getString("created_time"));
                                 commentItem.setBody(cur.getString("message"));
-
-                                new GraphRequest(
-                                        AccessToken.getCurrentAccessToken(),
-                                        "/" + commentItem.getId()+ "?fields=like_count,comment_count",
-                                        null,
-                                        HttpMethod.GET,
-                                        new GraphRequest.Callback() {
-                                            public void onCompleted(GraphResponse response) {
-                                                try{
-                                                    JSONObject like_comment_count = response.getJSONObject();
-                                                    commentItem.setLike(Integer.parseInt(like_comment_count.getString("like_count")));
-                                                    commentItem.setComment(Integer.parseInt(like_comment_count.getString("comment_count")));
-                                                }catch (JSONException e){
-                                                    e.printStackTrace();
-                                                }
-                                            }
-                                        }
-                                ).executeAsync();
+                                commentItem.setLike(Integer.parseInt(cur.getString("like_count")));
+                                commentItem.setComment(Integer.parseInt(cur.getString("comment_count")));
 
                                 new GraphRequest(
                                         AccessToken.getCurrentAccessToken(),

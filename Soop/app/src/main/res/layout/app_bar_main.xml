@@ -15,11 +15,6 @@
         android:background="#00d26d"
         android:gravity="center">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="32"/>
-
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -29,10 +24,10 @@
             app:contentInsetLeft="0dp"
             app:contentInsetStart="0dp"
             app:contentInsetStartWithNavigation="0dp"
-            app:popupTheme="@style/PopupOverlay"
-            >
+            app:popupTheme="@style/PopupOverlay">
 
             <LinearLayout
+                android:padding="7.5dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
@@ -40,27 +35,22 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="550"/>
+                    android:layout_weight="551"/>
 
                 <ImageView
                     android:layout_width="0dp"
-                    android:layout_weight="380"
+                    android:layout_weight="377"
                     android:layout_height="match_parent"
                     android:src="@drawable/logo"/>
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="516"
+                    android:layout_weight="512"
                     />
             </LinearLayout>
 
         </android.support.v7.widget.Toolbar>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="32"/>
 
     </android.support.design.widget.AppBarLayout>
 

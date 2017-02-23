@@ -1,6 +1,6 @@
 package com.example.sangh.soop.Holder;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
+        import android.support.v7.widget.RecyclerView;
+        import android.view.View;
 
 /**
  * Created by sangh on 2017-02-17.

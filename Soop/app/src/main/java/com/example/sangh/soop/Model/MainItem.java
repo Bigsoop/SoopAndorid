@@ -1,5 +1,7 @@
 package com.example.sangh.soop.Model;
 
+import com.example.sangh.soop.Constant;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -28,9 +30,9 @@ public class MainItem {
             this.setId(jsonObject.getString("id"));
             this.setLike(Integer.parseInt(jsonObject.getString("likes")));
             this.setComment(Integer.parseInt(jsonObject.getString("comments")));
-            this.setmShare(Integer.parseInt(jsonObject.getString("comments")));
+            this.setShare(Integer.parseInt(jsonObject.getString("comments")));
             this.setmDate(jsonObject.getString("created_time"));
-            this.setUniName(jsonObject.getString("univName"));
+            this.setUniName(Constant.UniName.values()[Integer.parseInt(jsonObject.getString("univKey"))]+"");
             this.setBody(jsonObject.getString("message").trim());
             return true;
         } catch (JSONException e) {
@@ -38,6 +40,7 @@ public class MainItem {
             return false;
         }
     }
+
 
     public String getUniName() {
         return mUniName;
@@ -92,11 +95,11 @@ public class MainItem {
         this.id = id;
     }
 
-    public int getmShare() {
+    public int getShare() {
         return mShare;
     }
 
-    public void setmShare(int mShare) {
+    public void setShare(int mShare) {
         this.mShare = mShare;
     }
 

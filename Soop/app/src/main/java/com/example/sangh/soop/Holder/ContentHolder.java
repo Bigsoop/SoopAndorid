@@ -57,7 +57,7 @@ public class ContentHolder extends BaseViewHolder<ContentItem>{
         public void onBindView(ContentItem item){
             mItem = item;
             if(mItem.getUniMark()!=0)mUniMark.setImageResource(mItem.getUniMark());
-            mUniName.setText(mItem.getUniName());
+            mUniName.setText(mItem.getUniName()+" 대나무숲");
             mLike.setText(" 좋아요 "+mItem.getLike()+"명");
             mComment.setText(" 댓글 "+mItem.getComment()+"개");
             mShare.setText(" 공유 " +mItem.getShare()+"회");

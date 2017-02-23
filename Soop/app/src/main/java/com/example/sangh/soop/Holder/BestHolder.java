@@ -39,7 +39,7 @@ public class BestHolder extends MainHolder {
         mUniName.setText(mItem.getUniName());
         mLike.setText(" 좋아요 "+mItem.getLike()+"개");
         mComment.setText(" 댓글 "+mItem.getComment()+"개");
-        share.setText(" 공유 "+mItem.getmShare()+"회");
+        share.setText(" 공유 "+mItem.getShare()+"회");
         mBody.setText(mItem.getBody());
         mDate.setText(mItem.getDate());
     }

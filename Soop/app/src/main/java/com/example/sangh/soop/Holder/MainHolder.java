@@ -39,7 +39,7 @@ public class MainHolder extends RecyclerView.ViewHolder implements View.OnClickL
     public void onBindView(MainItem item){
         mItem = item;
         if(mItem.getUniMark()!=0)mUniMark.setImageResource(mItem.getUniMark());
-        mUniName.setText(mItem.getUniName());
+        mUniName.setText(mItem.getUniName()+" 대나무숲");
         mLike.setText(mItem.getLike()+"");
         mComment.setText(mItem.getComment()+"");
         mBody.setText(mItem.getBody());
@@ -56,7 +56,7 @@ public class MainHolder extends RecyclerView.ViewHolder implements View.OnClickL
         intent.putExtra("like",mItem.getLike());
         intent.putExtra("comment",mItem.getComment());
         intent.putExtra("body",mItem.getBody());
-        intent.putExtra("share",mItem.getmShare());
+        intent.putExtra("share",mItem.getShare());
         mcon.startActivity(intent);
     }
 }

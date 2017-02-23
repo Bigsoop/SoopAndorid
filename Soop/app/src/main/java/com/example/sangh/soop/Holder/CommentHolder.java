@@ -66,10 +66,18 @@ public class CommentHolder extends BaseViewHolder<CommentItem>{
     public void onBindView(CommentItem item) {
         mItem = item;
         mUserName.setText(mItem.getUserName());
-        mLike.setText(" 좋아요 " + mItem.getLike() + "명");
+        if(mItem.getLike()==0) {
+            mLike.setText(" 좋아요 ");
+        }
+        else {
+            mLike.setText(" 좋아요 " + mItem.getLike() + "명");
+        }
+
         mComment.setText(" 댓글 " + mItem.getComment() + "개");
+
         mBody.setText(mItem.getBody());
         mDate.setText(mItem.getDate());
+
         Common.setCircleImage(mCon, mItem.getUserImg(), mUserImg);
 
         mUserImg.setOnClickListener(new View.OnClickListener() {

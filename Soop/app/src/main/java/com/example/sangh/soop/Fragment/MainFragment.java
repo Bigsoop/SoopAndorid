@@ -96,7 +96,6 @@ public class MainFragment extends Fragment{
             }
         });
 
-
         requestMainData(lastTime);
         updateUI();
         return v;
