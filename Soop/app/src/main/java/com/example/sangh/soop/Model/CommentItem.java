@@ -11,6 +11,15 @@ public class CommentItem extends MainItem{
     private String mUserName;
     private String mUserId;
     private String mUserImg;
+    private boolean comment_able=true;
+
+    public boolean isComment_able() {
+        return comment_able;
+    }
+
+    public void setComment_able(boolean comment_able) {
+        this.comment_able = comment_able;
+    }
 
     public String getUserImg() {
         return mUserImg;

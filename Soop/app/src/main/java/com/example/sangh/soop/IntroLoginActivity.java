@@ -34,7 +34,9 @@ public class IntroLoginActivity extends AppCompatActivity {
             hd.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    startActivity(new Intent(IntroLoginActivity.this, MainActivity.class));
+                    Intent intent = new Intent(IntroLoginActivity.this, MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
                 }
             }, 1500);
         }
@@ -50,7 +52,7 @@ public class IntroLoginActivity extends AppCompatActivity {
                 public void onSuccess(LoginResult loginResult) {
                     AppLog.i(TAG,loginResult+"");
                     Intent intent = new Intent(IntroLoginActivity.this, MainActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK |Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     User.setIsLogin(getApplicationContext(),true);
                     startActivity(intent);
                     finish();

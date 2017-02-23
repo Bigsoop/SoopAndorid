@@ -26,12 +26,15 @@ import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
+import com.facebook.Profile;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -89,7 +92,7 @@ public class CommentActivity extends AppCompatActivity {
         inputCommentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String text = editComment.getText().toString();
+                final String text = editComment.getText().toString();
                 if(text.length()==0) return;
                 Bundle params = new Bundle();
                 params.putString("message", text);
@@ -101,15 +104,27 @@ public class CommentActivity extends AppCompatActivity {
                         new GraphRequest.Callback() {
                             public void onCompleted(GraphResponse response) {
                                 new GreenToast(getApplicationContext()).showToast("댓글이 등록되었습니다.");
+                                CommentItem commentItem =new CommentItem();
+                                commentItem.setComment_able(false);
+                                commentItem.setUserName(Profile.getCurrentProfile().getName());
+                                commentItem.setComment(0);
+                                commentItem.setLike(0);
+                                commentItem.setBody(text);
+                                commentItem.setUserImg(Profile.getCurrentProfile().getLinkUri().toString());
+                                long curTime = System.currentTimeMillis();
+                                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                                String str = format.format(new Date(curTime));
+                                commentItem.setDate(str);
+                                mMultipleItems.add(commentItem);
                                 mCommentAdapter.notifyDataSetChanged();
                                 //AppLog.i(TAG,  "/"+ id + "/comments"
                             }
                         }
                 ).executeAsync();
-
                 editComment.setText("");
             }
         });
+        mCommentAdapter.notifyDataSetChanged();
     }
 
     private void inputData() {
@@ -121,6 +136,7 @@ public class CommentActivity extends AppCompatActivity {
         commentItem.setDate(createTime);
         commentItem.setLike(like);
         commentItem.setComment(comment);
+        commentItem.setComment_able(false);
         mMultipleItems.add(commentItem);
 
         new GraphRequest(
@@ -146,6 +162,7 @@ public class CommentActivity extends AppCompatActivity {
                                 commentItem.setBody(cur.getString("message"));
                                 commentItem.setLike(Integer.parseInt(cur.getString("like_count")));
                                 commentItem.setComment(Integer.parseInt(cur.getString("comment_count")));
+                                commentItem.setComment_able(true);
 
                                 new GraphRequest(
                                         AccessToken.getCurrentAccessToken(),
@@ -159,16 +176,17 @@ public class CommentActivity extends AppCompatActivity {
                                                     JSONObject userImg = response.getJSONObject();
                                                     JSONObject data = userImg.getJSONObject("data");
                                                     commentItem.setUserImg(data.getString("url"));
+                                                    mCommentAdapter.notifyDataSetChanged();
                                                 }catch (JSONException e){
                                                     e.printStackTrace();
                                                 }
                                             }
                                         }
                                 ).executeAsync();
-
                                 mMultipleItems.add(commentItem);
+                                mCommentAdapter.notifyDataSetChanged();
                             }
-                            mCommentAdapter.notifyDataSetChanged();
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

@@ -74,10 +74,8 @@ public class CommentHolder extends BaseViewHolder<CommentItem>{
         }
 
         mComment.setText(" 댓글 " + mItem.getComment() + "개");
-
         mBody.setText(mItem.getBody());
         mDate.setText(mItem.getDate());
-
         Common.setCircleImage(mCon, mItem.getUserImg(), mUserImg);
 
         mUserImg.setOnClickListener(new View.OnClickListener() {
@@ -92,7 +90,7 @@ public class CommentHolder extends BaseViewHolder<CommentItem>{
         commentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mItem.getComment()!=0) {
+                if(mItem.getComment()!=0 && mItem.isComment_able()) {
                     Intent intent = new Intent(mCon, CommentActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     intent.putExtra("commentId", mItem.getId());
