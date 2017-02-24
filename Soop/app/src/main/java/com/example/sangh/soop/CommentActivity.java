@@ -14,12 +14,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-
 import com.example.sangh.soop.Holder.BaseViewHolder;
+import com.example.sangh.soop.Holder.CommentCommentHolder;
 import com.example.sangh.soop.Holder.CommentHolder;
-import com.example.sangh.soop.Holder.ContentHolder;
 import com.example.sangh.soop.Model.CommentItem;
-import com.example.sangh.soop.Model.ContentItem;
 import com.example.sangh.soop.Model.MainItem;
 import com.example.sangh.soop.view.GreenToast;
 import com.facebook.AccessToken;
@@ -161,8 +159,6 @@ public class CommentActivity extends AppCompatActivity {
                                 commentItem.setDate(cur.getString("created_time"));
                                 commentItem.setBody(cur.getString("message"));
                                 commentItem.setLike(Integer.parseInt(cur.getString("like_count")));
-                                commentItem.setComment(Integer.parseInt(cur.getString("comment_count")));
-                                commentItem.setComment_able(true);
 
                                 new GraphRequest(
                                         AccessToken.getCurrentAccessToken(),
@@ -214,7 +210,7 @@ public class CommentActivity extends AppCompatActivity {
             if (viewType == VIEW_TYPE_COMMENT1) {
                 return CommentHolder.newInstance2(mContext,parent);
             } else {
-                return CommentHolder.newInstance3(mContext, parent);
+                return CommentCommentHolder.newInstance(mContext, parent);
             }
         }
 
@@ -227,8 +223,8 @@ public class CommentActivity extends AppCompatActivity {
                 }
             } else {
                 CommentItem commentItem =(CommentItem)mMultipleItems.get(position);
-                if(holder instanceof CommentHolder) {
-                    ((CommentHolder) holder).onBindView(commentItem);
+                if(holder instanceof CommentCommentHolder) {
+                    ((CommentCommentHolder) holder).onBindView(commentItem);
                 }
             }
         }

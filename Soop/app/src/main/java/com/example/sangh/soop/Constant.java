@@ -36,4 +36,8 @@ public class Constant {
         상지대학교, 서울예술대학교, 한양여자대학교, 동의대학교, 한국외대글로벌캠퍼스, 구_명지대학교, 구_동덕여자대학교
     }
 
+    public enum uniImg{
+
+    }
+
 }

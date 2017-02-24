@@ -43,12 +43,6 @@ public class CommentHolder extends BaseViewHolder<CommentItem>{
     }
 
 
-    public static CommentHolder newInstance3(Context con,ViewGroup parent){
-        View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.comment_comment_item, parent, false);
-        return new CommentHolder(con,itemView);
-    }
-
     public CommentHolder(Context con,View itemView) {
         super(itemView);
         this.mCon = con;
@@ -66,13 +60,7 @@ public class CommentHolder extends BaseViewHolder<CommentItem>{
     public void onBindView(CommentItem item) {
         mItem = item;
         mUserName.setText(mItem.getUserName());
-        if(mItem.getLike()==0) {
-            mLike.setText(" 좋아요 ");
-        }
-        else {
-            mLike.setText(" 좋아요 " + mItem.getLike() + "명");
-        }
-
+        mLike.setText(" 좋아요 " + mItem.getLike() + "명");
         mComment.setText(" 댓글 " + mItem.getComment() + "개");
         mBody.setText(mItem.getBody());
         mDate.setText(mItem.getDate());
