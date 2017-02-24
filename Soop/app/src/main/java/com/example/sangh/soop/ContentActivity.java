@@ -45,10 +45,10 @@ public class ContentActivity extends AppCompatActivity {
     private ContentAdapter mAdapter;
     private List<MainItem> mMultipleItems;
     private Context mContext;
-    int uniMark;
     int comment;
     int like;
     int share;
+    String uniMark;
     String id;
     String date;
     String uniName;
@@ -67,7 +67,7 @@ public class ContentActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         id = intent.getExtras().getString("id");
-        uniMark = intent.getExtras().getInt("uniMark");
+        uniMark = intent.getExtras().getString("uniMark");
         comment = intent.getExtras().getInt("comment");
         like = intent.getExtras().getInt("like");
         date = intent.getExtras().getString("date");

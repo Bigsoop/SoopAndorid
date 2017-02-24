@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.example.sangh.soop.AppLog;
+import com.example.sangh.soop.Common;
 import com.example.sangh.soop.Model.ContentItem;
 import com.example.sangh.soop.R;
 import com.example.sangh.soop.view.GreenToast;
@@ -56,13 +57,13 @@ public class ContentHolder extends BaseViewHolder<ContentItem>{
 
         public void onBindView(ContentItem item){
             mItem = item;
-            if(mItem.getUniMark()!=0)mUniMark.setImageResource(mItem.getUniMark());
             mUniName.setText(mItem.getUniName()+" 대나무숲");
             mLike.setText(" 좋아요 "+mItem.getLike()+"명");
             mComment.setText(" 댓글 "+mItem.getComment()+"개");
             mShare.setText(" 공유 " +mItem.getShare()+"회");
             mBody.setText(mItem.getBody());
             mDate.setText(mItem.getDate());
+            Common.setCircleImage(mContext, mItem.getUniMark(), mUniMark);
             layLike.setOnClickListener(new View.OnClickListener() {
 
                 @Override
@@ -80,8 +81,6 @@ public class ContentHolder extends BaseViewHolder<ContentItem>{
                                     }
                             }
                     ).executeAsync();
-
-
                 }
             });
         }

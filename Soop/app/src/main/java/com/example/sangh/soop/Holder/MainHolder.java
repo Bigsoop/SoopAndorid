@@ -5,6 +5,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.sangh.soop.Common;
 import com.example.sangh.soop.ContentActivity;
 import com.example.sangh.soop.Model.MainItem;
 import com.example.sangh.soop.R;
@@ -21,7 +23,7 @@ public class MainHolder extends RecyclerView.ViewHolder implements View.OnClickL
     protected TextView mLike;
     protected TextView mComment;
     protected TextView mBody;
-    private Context mcon;
+    protected Context mcon;
 
     public MainHolder(View itemView, Context mcon){
         super(itemView);
@@ -38,12 +40,12 @@ public class MainHolder extends RecyclerView.ViewHolder implements View.OnClickL
 
     public void onBindView(MainItem item){
         mItem = item;
-        if(mItem.getUniMark()!=0)mUniMark.setImageResource(mItem.getUniMark());
         mUniName.setText(mItem.getUniName()+" 대나무숲");
         mLike.setText(mItem.getLike()+"");
         mComment.setText(mItem.getComment()+"");
         mBody.setText(mItem.getBody());
         mDate.setText(mItem.getDate());
+        Common.setCircleImage(mcon, mItem.getUniMark(), mUniMark);
     }
 
     @Override

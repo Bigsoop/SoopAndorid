@@ -5,6 +5,7 @@ import android.graphics.Typeface;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.sangh.soop.Common;
 import com.example.sangh.soop.Model.MainItem;
 import com.example.sangh.soop.R;
 
@@ -35,13 +36,13 @@ public class BestHolder extends MainHolder {
     @Override
     public void onBindView(MainItem item){
         mItem = item;
-        if(mItem.getUniMark()!=0)mUniMark.setImageResource(mItem.getUniMark());
         mUniName.setText(mItem.getUniName());
         mLike.setText(" 좋아요 "+mItem.getLike()+"개");
         mComment.setText(" 댓글 "+mItem.getComment()+"개");
         share.setText(" 공유 "+mItem.getShare()+"회");
         mBody.setText(mItem.getBody());
         mDate.setText(mItem.getDate());
+        Common.setCircleImage(mcon, mItem.getUniMark(), mUniMark);
     }
 
 }

@@ -15,7 +15,8 @@ import java.util.UUID;
 public class MainItem {
 
     private String id;
-    private int mUniMark;
+    private String mUniMarkUrl;
+    private String mUniMark;
     private String mUniName;
     private String mDate;
     private String mBody;
@@ -33,6 +34,7 @@ public class MainItem {
             this.setShare(Integer.parseInt(jsonObject.getString("comments")));
             this.setmDate(jsonObject.getString("created_time"));
             this.setUniName(Constant.UniName.values()[Integer.parseInt(jsonObject.getString("univKey"))]+"");
+            this.setUniMarkUrl("/"+Constant.uniImg[Integer.parseInt(jsonObject.getString("univKey"))]+"/picture");
             this.setBody(jsonObject.getString("message").trim());
             return true;
         } catch (JSONException e) {
@@ -41,6 +43,13 @@ public class MainItem {
         }
     }
 
+    public String getUniMark() {
+        return mUniMark;
+    }
+
+    public void setUniMark(String uniMark) {
+        mUniMark = uniMark;
+    }
 
     public String getUniName() {
         return mUniName;
@@ -56,12 +65,12 @@ public class MainItem {
         mDate = date;
     }
 
-    public int getUniMark() {
-        return mUniMark;
+    public String getUniMarkUrl() {
+        return mUniMarkUrl;
     }
 
-    public void setUniMark(int uniMark) {
-        mUniMark = uniMark;
+    public void setUniMarkUrl(String uniMarkUrl) {
+        mUniMarkUrl = uniMarkUrl;
     }
 
     public int getLike() {

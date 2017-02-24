@@ -11,6 +11,11 @@ import android.view.MenuItem;
 import com.example.sangh.soop.Adapter.BestAdapter;
 import com.example.sangh.soop.Model.MainItem;
 import com.example.sangh.soop.view.GreenToast;
+import com.facebook.AccessToken;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -87,8 +92,26 @@ public class BestActivity extends AppCompatActivity {
                         JSONArray responseJson = new JSONArray(response.body().string());
                         for(int i=0; i<responseJson.length(); i++){
                             JSONObject cur = responseJson.getJSONObject(i);
-                            MainItem mainItem = new MainItem();
+                            final MainItem mainItem = new MainItem();
                             if(!mainItem.setJsonObject(cur)) continue;
+                            new GraphRequest(
+                                    AccessToken.getCurrentAccessToken(),
+                                    mainItem.getUniMarkUrl()+"?redirect=false",
+                                    null,
+                                    HttpMethod.GET,
+                                    new GraphRequest.Callback() {
+                                        public void onCompleted(GraphResponse response) {
+                                            try{
+                                                JSONObject userImg = response.getJSONObject();
+                                                JSONObject data = userImg.getJSONObject("data");
+                                                mainItem.setUniMark(data.getString("url"));
+                                                bestAdapter.notifyDataSetChanged();
+                                            }catch (JSONException e){
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                    }
+                            ).executeAsync();
                             dataSet.add(mainItem);
 
                         }

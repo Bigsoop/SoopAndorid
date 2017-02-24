@@ -36,8 +36,16 @@ public class Constant {
         상지대학교, 서울예술대학교, 한양여자대학교, 동의대학교, 한국외대글로벌캠퍼스, 구_명지대학교, 구_동덕여자대학교
     }
 
-    public enum uniImg{
-
-    }
+    public static final String[] uniImg ={
+        "HangughangGongdaehaggyo","SNUBamboo","yonseibamboo","koreabamboo","sogangbamboo","SKKUBamboo","hyubamboo","caubamboo","kyungheebamboo","hufsbamboo",
+        "uosbamboo","sstt2015","ChungNamNationalBamboo","ajoubamboo","donggukbamboo","mjubamboo","sejongbamboo","KnutBambooForest","swubamboo",
+        "unibamboooo0","kwubamboo","dkubamboo","seoultechbamboo","hongikbamboo","smubb","inhabamboo2","chungbuknubamboo",
+        "jbnusay", "ericadruwa", "incheonbamboo", "snuebamboo", "postechbamboo", "schubamboo", "bamboosmwu", "GISTIT.ac.kr", "CUKbby",
+        "gcubamboo", "kyonggibamboo", "gnubamboo1", "konkukbamboo","yubamboo.net", "KNUbamboo", "MaeGuemI", "dongabamboo", "PKNUBamboo", "SungshinBamboo",
+        "koungju15", "HSUGrove", "SeoKyeongUnivBamboo", "yonginbamboo", "SCNUbamboo", "hanseibamboo", "knubambooforest", "SKUBAMBOO",
+        "skhubamboo", "CJUbambooo", "ulsanbamboo", "kunsanspeak", "HonamUniversityBambooGrove", "SMUBomboo", "pnubamboo", "syubamboo","ANUbamboo", "bamboo1kmu",
+        "MNUBamboo", "shinhan001", "1713654792215496", "HNUbamboo", "kyuforest","dssaytomeanything","KANGWONbamboo","dongdeasup","daenamookumoh",
+       "ginuebamboo","dongdukbamboo","euljibamboo","KIUBABOO","kartsbamboo","859759640748426","kaistbamboofp","BUFSbamboo",
+        "dailysangji","realcommunicatedsia","hywubamboo", "420588408103211","globalbamboo","MJbamboo","1431832823796835"};
 
 }
