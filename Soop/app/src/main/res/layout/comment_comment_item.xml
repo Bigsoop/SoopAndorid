@@ -17,7 +17,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="5dp"
             android:orientation="horizontal">
 
@@ -29,14 +29,14 @@
                 android:gravity="center_horizontal">
 
                 <ImageView
-                    android:id="@+id/userImg_comment"
+                    android:id="@+id/userImg_no_comment"
                     android:layout_width="37.5dp"
                     android:layout_height="37.5dp"
                     android:layout_gravity="center_horizontal"
                     android:src="@drawable/sulhyun"/>
 
                 <TextView
-                    android:id="@+id/userName_comment"
+                    android:id="@+id/userName_no_comment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
@@ -55,19 +55,20 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/body_comment"
+                    android:id="@+id/body_no_comment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:textSize="12dp"
-                    android:layout_marginTop="5dp"
                     tools:text="스탠포드 가구씨뽀용 ~  ㅋㄷㅋㄷㅋㄷㅋㄷㅋㄷㅋㄷㅋㄷㅋㄷㅋㄷ  한국엔 항공대 미국엔 스탠포드!"/>
 
                 <TextView
-                    android:id="@+id/date_comment"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/date_no_comment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
                     android:textSize="10dp"
                     tools:text="2017년 2월 15일 오전 12:21"/>
             </LinearLayout>
@@ -80,14 +81,14 @@
 
             <LinearLayout
                 android:padding="2.5dp"
-                android:id="@+id/like_linear"
+                android:id="@+id/like_no_linear"
                 android:layout_marginLeft="17.5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="23dp"
                 android:background="#cbf4e0"
                 android:orientation="horizontal"
-                android:layout_toLeftOf="@+id/comment_linear"
-                android:layout_marginRight="5dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
                 android:gravity="center">
 
                 <ImageView
@@ -96,37 +97,14 @@
                     android:background="@drawable/like"/>
 
                 <TextView
-                    android:id="@+id/like_comment"
+                    android:id="@+id/like_no_comment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="좋아요 100명"
                     android:textSize="10dp"/>
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/comment_linear"
-                android:padding="2.5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="23dp"
-                android:background="#cbf4e0"
-                android:layout_marginRight="10dp"
-                android:orientation="horizontal"
-                android:layout_alignParentRight="true"
-                android:gravity="center">
 
-
-                <ImageView
-                    android:layout_width="12.5dp"
-                    android:layout_height="12.5dp"
-                    android:background="@drawable/comment"/>
-
-                <TextView
-                    android:id="@+id/comment_comment"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="10dp"
-                    android:text="댓글 20개"/>
-            </LinearLayout>
 
         </RelativeLayout>
     </LinearLayout>

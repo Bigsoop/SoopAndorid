@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.sangh.soop.CommentActivity;
 import com.example.sangh.soop.Common;
 import com.example.sangh.soop.Model.CommentItem;
 import com.example.sangh.soop.R;
@@ -32,7 +31,7 @@ public class CommentCommentHolder extends BaseViewHolder<CommentItem>{
 
     public static CommentCommentHolder newInstance(Context con,ViewGroup parent){
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.no_comment_item, parent, false);
+                .inflate(R.layout.comment_comment_item, parent, false);
         return new CommentCommentHolder(con,itemView);
     }
 

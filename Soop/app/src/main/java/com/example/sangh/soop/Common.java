@@ -4,11 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.net.ParseException;
 import android.net.Uri;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.facebook.Profile;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
@@ -52,5 +56,12 @@ public class Common {
             AppLog.e("CircleImage", "Context Error");
 
         }
+    }
+
+    public static String dateFormat(String date)
+    {
+        String d = (String) date.subSequence(0,10);
+        String t = (String) date.subSequence(11,19);
+        return d+" "+t;
     }
 }

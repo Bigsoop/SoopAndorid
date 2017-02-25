@@ -28,6 +28,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -55,11 +56,13 @@ public class ContentActivity extends AppCompatActivity {
     String body;
     Button inputCommentBtn;
     EditText editComment;
-
+    boolean loginStatus;
     @Override
     protected void onCreate(Bundle savedSavedInstance) {
         super.onCreate(savedSavedInstance);
         setContentView(R.layout.activity_content);
+        loginStatus=User.getIsLogin(this);
+
         mContext=getApplicationContext();
         mToolbar = (Toolbar) findViewById(R.id.toolbar_content);
         mRecyclerView = (RecyclerView) findViewById(R.id.content_recycler_view);
@@ -87,36 +90,42 @@ public class ContentActivity extends AppCompatActivity {
         inputCommentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String text = editComment.getText().toString();
-                if(text.length()==0) return;
-                Bundle params = new Bundle();
-                params.putString("message", text);
-                new GraphRequest(
-                        AccessToken.getCurrentAccessToken(),
-                        "/"+ id + "/comments",
-                        params,
-                        HttpMethod.POST,
-                        new GraphRequest.Callback() {
-                            public void onCompleted(GraphResponse response) {
-                                new GreenToast(getApplicationContext()).showToast("댓글이 등록되었습니다.");
-                                CommentItem commentItem =new CommentItem();
-                                commentItem.setComment_able(false);
-                                commentItem.setUserName(Profile.getCurrentProfile().getName());
-                                commentItem.setComment(0);
-                                commentItem.setLike(0);
-                                commentItem.setBody(text);
-                                commentItem.setUserImg(Profile.getCurrentProfile().getLinkUri().toString());
-                                long curTime = System.currentTimeMillis();
-                                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-                                String str = format.format(new Date(curTime));
-                                commentItem.setDate(str);
-                                mMultipleItems.add(commentItem);
-                                mAdapter.notifyDataSetChanged();
-                                //AppLog.i(TAG,  "/"+ id + "/comments"
+                if (loginStatus) {
+                    final String text = editComment.getText().toString();
+                    if (text.length() == 0) return;
+                    Bundle params = new Bundle();
+                    params.putString("message", text);
+                    new GraphRequest(
+                            AccessToken.getCurrentAccessToken(),
+                            "/" + id + "/comments",
+                            params,
+                            HttpMethod.POST,
+                            new GraphRequest.Callback() {
+                                public void onCompleted(GraphResponse response) {
+                                    new GreenToast(getApplicationContext()).showToast("댓글이 등록되었습니다.");
+                                    CommentItem commentItem = new CommentItem();
+                                    commentItem.setComment_able(false);
+                                    commentItem.setUserName(Profile.getCurrentProfile().getName());
+                                    commentItem.setComment(0);
+                                    commentItem.setLike(0);
+                                    commentItem.setBody(text);
+                                    commentItem.setUserImg(Profile.getCurrentProfile().getLinkUri().toString());
+                                    long curTime = System.currentTimeMillis();
+                                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd' 'hh:mm:ss");
+                                    String str = format.format(new Date(curTime));
+                                    commentItem.setDate(str);
+                                    mMultipleItems.add(commentItem);
+                                    mAdapter.notifyDataSetChanged();
+                                    //AppLog.i(TAG,  "/"+ id + "/comments"
+                                }
                             }
-                        }
-                ).executeAsync();
-                editComment.setText("");
+                    ).executeAsync();
+                    editComment.setText("");
+                }
+                else{
+                    new GreenToast(getApplicationContext()).showToast("댓글을 입력하려면 로그인이 필요합니다.");
+                    editComment.setText("");
+                }
             }
         });
         mAdapter.notifyDataSetChanged();
@@ -140,6 +149,7 @@ public class ContentActivity extends AppCompatActivity {
         contentItem.setBody(body);
         mMultipleItems.add(contentItem);
 
+        if(loginStatus) {
             new GraphRequest(
                     AccessToken.getCurrentAccessToken(),
                     "/" + id + "/comments?fields=like_count,comment_count,message,created_time,user_likes,from",
@@ -148,36 +158,36 @@ public class ContentActivity extends AppCompatActivity {
                     new GraphRequest.Callback() {
                         public void onCompleted(GraphResponse response) {
                             try {
-                                JSONObject jo= response.getJSONObject();
-                                AppLog.i(TAG,jo.toString());
+                                JSONObject jo = response.getJSONObject();
+                                AppLog.i(TAG, jo.toString());
                                 JSONArray ja = jo.getJSONArray("data");
 
-                                for(int i=0; i<ja.length(); i++){
+                                for (int i = 0; i < ja.length(); i++) {
                                     final CommentItem commentItem = new CommentItem();
                                     JSONObject cur = ja.getJSONObject(i);
                                     JSONObject from = cur.getJSONObject("from");
                                     commentItem.setUserId(from.getString("id"));
                                     commentItem.setUserName(from.getString("name"));
                                     commentItem.setId(cur.getString("id"));
-                                    commentItem.setDate(cur.getString("created_time"));
+                                    commentItem.setDate(Common.dateFormat(cur.getString("created_time")));
                                     commentItem.setBody(cur.getString("message"));
                                     commentItem.setLike(Integer.parseInt(cur.getString("like_count")));
                                     commentItem.setComment(Integer.parseInt(cur.getString("comment_count")));
 
                                     new GraphRequest(
                                             AccessToken.getCurrentAccessToken(),
-                                            "/" + commentItem.getUserId()+"/picture?redirect=false",
+                                            "/" + commentItem.getUserId() + "/picture?redirect=false",
                                             null,
                                             HttpMethod.GET,
                                             new GraphRequest.Callback() {
                                                 public void onCompleted(GraphResponse response) {
-                                                    try{
-                                                        AppLog.i(TAG,"/" + commentItem.getUserId()+"/picture");
+                                                    try {
+                                                        AppLog.i(TAG, "/" + commentItem.getUserId() + "/picture");
                                                         JSONObject userImg = response.getJSONObject();
                                                         JSONObject data = userImg.getJSONObject("data");
                                                         commentItem.setUserImg(data.getString("url"));
                                                         mAdapter.notifyDataSetChanged();
-                                                    }catch (JSONException e){
+                                                    } catch (JSONException e) {
                                                         e.printStackTrace();
                                                     }
                                                 }
@@ -192,7 +202,10 @@ public class ContentActivity extends AppCompatActivity {
                         }
                     }
             ).executeAsync();
-
+        }
+        else{
+            new GreenToast(getApplicationContext()).showToast("로그인을 하면 댓글을 볼 수 있습니다.");
+        }
     }
 
 

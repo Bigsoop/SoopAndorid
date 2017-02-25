@@ -110,7 +110,7 @@ public class CommentActivity extends AppCompatActivity {
                                 commentItem.setBody(text);
                                 commentItem.setUserImg(Profile.getCurrentProfile().getLinkUri().toString());
                                 long curTime = System.currentTimeMillis();
-                                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd' 'hh:mm:ss");
                                 String str = format.format(new Date(curTime));
                                 commentItem.setDate(str);
                                 mMultipleItems.add(commentItem);
@@ -156,7 +156,7 @@ public class CommentActivity extends AppCompatActivity {
                                 commentItem.setUserId(from.getString("id"));
                                 commentItem.setUserName(from.getString("name"));
                                 commentItem.setId(cur.getString("id"));
-                                commentItem.setDate(cur.getString("created_time"));
+                                commentItem.setDate(Common.dateFormat(cur.getString("created_time")));
                                 commentItem.setBody(cur.getString("message"));
                                 commentItem.setLike(Integer.parseInt(cur.getString("like_count")));
 

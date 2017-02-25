@@ -21,7 +21,7 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_main"
-        android:background="#efeeee">
+        android:background="#ffffff">
     </android.support.design.widget.NavigationView>
 
 
