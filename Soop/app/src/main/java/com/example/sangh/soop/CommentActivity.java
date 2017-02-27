@@ -133,6 +133,7 @@ public class CommentActivity extends AppCompatActivity {
         commentItem.setBody(body);
         commentItem.setDate(createTime);
         commentItem.setLike(like);
+        commentItem.setUserId(userId);
         commentItem.setComment(comment);
         commentItem.setComment_able(false);
         mMultipleItems.add(commentItem);

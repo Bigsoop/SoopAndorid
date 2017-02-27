@@ -60,7 +60,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
                     android:textSize="12dp"
-                    android:layout_marginTop="5dp"
                     tools:text="스탠포드 가구씨뽀용 ~  ㅋㄷㅋㄷㅋㄷㅋㄷㅋㄷㅋㄷㅋㄷㅋㄷㅋㄷ  한국엔 항공대 미국엔 스탠포드!"/>
 
                 <TextView

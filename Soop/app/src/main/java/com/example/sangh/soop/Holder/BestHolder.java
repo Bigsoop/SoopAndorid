@@ -36,7 +36,7 @@ public class BestHolder extends MainHolder {
     @Override
     public void onBindView(MainItem item){
         mItem = item;
-        mUniName.setText(mItem.getUniName());
+        mUniName.setText(mItem.getUniName()+" 대나무숲");
         mLike.setText(" 좋아요 "+mItem.getLike()+"개");
         mComment.setText(" 댓글 "+mItem.getComment()+"개");
         share.setText(" 공유 "+mItem.getShare()+"회");

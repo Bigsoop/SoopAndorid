@@ -60,10 +60,16 @@ public class MainFragment extends Fragment{
         View v = inflater.inflate(R.layout.fragment_main, container, false);
 
         mSwipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.main_swipe_layout);
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 mSwipeRefreshLayout.setRefreshing(false);
+                lastTime = "2030-1-1 12:00";
+                mMainItems.clear();
+                requestMainData(lastTime);
+                updateUI();
+                new GreenToast(getActivity()).showToast("업데이트 되었습니다");
             }
         });
 

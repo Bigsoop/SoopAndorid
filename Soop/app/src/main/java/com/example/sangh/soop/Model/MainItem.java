@@ -31,7 +31,7 @@ public class MainItem {
             this.setId(jsonObject.getString("id"));
             this.setLike(Integer.parseInt(jsonObject.getString("likes")));
             this.setComment(Integer.parseInt(jsonObject.getString("comments")));
-            this.setShare(Integer.parseInt(jsonObject.getString("comments")));
+            this.setShare(Integer.parseInt(jsonObject.getString("shares")));
             this.setmDate(jsonObject.getString("created_time"));
             this.setUniName(Constant.UniName.values()[Integer.parseInt(jsonObject.getString("univKey"))]+"");
             this.setUniMarkUrl("/"+Constant.uniImg[Integer.parseInt(jsonObject.getString("univKey"))]+"/picture");

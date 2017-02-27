@@ -23,12 +23,9 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
 import com.facebook.Profile;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -149,59 +146,58 @@ public class ContentActivity extends AppCompatActivity {
         contentItem.setBody(body);
         mMultipleItems.add(contentItem);
 
-        if(loginStatus) {
-            new GraphRequest(
-                    AccessToken.getCurrentAccessToken(),
-                    "/" + id + "/comments?fields=like_count,comment_count,message,created_time,user_likes,from",
-                    null,
-                    HttpMethod.GET,
-                    new GraphRequest.Callback() {
-                        public void onCompleted(GraphResponse response) {
-                            try {
+        if (loginStatus) {
+                new GraphRequest(
+                        AccessToken.getCurrentAccessToken(),
+                        "/" + id + "/comments?fields=like_count,comment_count,message,created_time,user_likes,from",
+                        null,
+                        HttpMethod.GET,
+                        new GraphRequest.Callback() {
+                            public void onCompleted(GraphResponse response) {
                                 JSONObject jo = response.getJSONObject();
-                                AppLog.i(TAG, jo.toString());
-                                JSONArray ja = jo.getJSONArray("data");
+                                try {
+                                    JSONArray ja = jo.getJSONArray("data");
 
-                                for (int i = 0; i < ja.length(); i++) {
-                                    final CommentItem commentItem = new CommentItem();
-                                    JSONObject cur = ja.getJSONObject(i);
-                                    JSONObject from = cur.getJSONObject("from");
-                                    commentItem.setUserId(from.getString("id"));
-                                    commentItem.setUserName(from.getString("name"));
-                                    commentItem.setId(cur.getString("id"));
-                                    commentItem.setDate(Common.dateFormat(cur.getString("created_time")));
-                                    commentItem.setBody(cur.getString("message"));
-                                    commentItem.setLike(Integer.parseInt(cur.getString("like_count")));
-                                    commentItem.setComment(Integer.parseInt(cur.getString("comment_count")));
+                                    for (int i = 0; i < ja.length(); i++) {
+                                        final CommentItem commentItem = new CommentItem();
+                                        JSONObject cur = ja.getJSONObject(i);
+                                        JSONObject from = cur.getJSONObject("from");
+                                        commentItem.setUserId(from.getString("id"));
+                                        commentItem.setUserName(from.getString("name"));
+                                        commentItem.setId(cur.getString("id"));
+                                        commentItem.setDate(Common.dateFormat(cur.getString("created_time")));
+                                        commentItem.setBody(cur.getString("message"));
+                                        commentItem.setLike(Integer.parseInt(cur.getString("like_count")));
+                                        commentItem.setComment(Integer.parseInt(cur.getString("comment_count")));
 
-                                    new GraphRequest(
-                                            AccessToken.getCurrentAccessToken(),
-                                            "/" + commentItem.getUserId() + "/picture?redirect=false",
-                                            null,
-                                            HttpMethod.GET,
-                                            new GraphRequest.Callback() {
-                                                public void onCompleted(GraphResponse response) {
-                                                    try {
-                                                        AppLog.i(TAG, "/" + commentItem.getUserId() + "/picture");
-                                                        JSONObject userImg = response.getJSONObject();
-                                                        JSONObject data = userImg.getJSONObject("data");
-                                                        commentItem.setUserImg(data.getString("url"));
-                                                        mAdapter.notifyDataSetChanged();
-                                                    } catch (JSONException e) {
-                                                        e.printStackTrace();
+                                        new GraphRequest(
+                                                AccessToken.getCurrentAccessToken(),
+                                                "/" + commentItem.getUserId() + "/picture?redirect=false",
+                                                null,
+                                                HttpMethod.GET,
+                                                new GraphRequest.Callback() {
+                                                    public void onCompleted(GraphResponse response) {
+                                                        try {
+                                                            AppLog.i(TAG, "/" + commentItem.getUserId() + "/picture");
+                                                            JSONObject userImg = response.getJSONObject();
+                                                            JSONObject data = userImg.getJSONObject("data");
+                                                            commentItem.setUserImg(data.getString("url"));
+                                                            mAdapter.notifyDataSetChanged();
+                                                        } catch (JSONException e) {
+                                                            e.printStackTrace();
+                                                        }
                                                     }
                                                 }
-                                            }
-                                    ).executeAsync();
-                                    mMultipleItems.add(commentItem);
-                                    mAdapter.notifyDataSetChanged();
+                                        ).executeAsync();
+                                        mMultipleItems.add(commentItem);
+                                        mAdapter.notifyDataSetChanged();
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
                                 }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
                             }
                         }
-                    }
-            ).executeAsync();
+                ).executeAsync();
         }
         else{
             new GreenToast(getApplicationContext()).showToast("로그인을 하면 댓글을 볼 수 있습니다.");
@@ -249,7 +245,7 @@ public class ContentActivity extends AppCompatActivity {
 
         @Override
         public int getItemCount() {
-          return  mMultipleItems.size();
+            return  mMultipleItems.size();
         }
     }
 
