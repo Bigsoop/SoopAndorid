@@ -14,6 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.example.sangh.soop.Adapter.CommentAdapter;
 import com.example.sangh.soop.Holder.BaseViewHolder;
 import com.example.sangh.soop.Holder.CommentCommentHolder;
 import com.example.sangh.soop.Holder.CommentHolder;
@@ -193,53 +195,8 @@ public class CommentActivity extends AppCompatActivity {
     }
 
     private void updateUI() {
-        mCommentAdapter = new CommentAdapter();
+        mCommentAdapter = new CommentAdapter(mContext,mMultipleItems);
         mRecyclerView.setAdapter(mCommentAdapter);
-    }
-
-
-    public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
-        public static final int VIEW_TYPE_COMMENT1 = 0;
-        public static final int VIEW_TYPE_COMMENT2 = 1;
-
-        public CommentAdapter() {
-        }
-
-        @Override
-        public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            if (viewType == VIEW_TYPE_COMMENT1) {
-                return CommentHolder.newInstance2(mContext,parent);
-            } else {
-                return CommentCommentHolder.newInstance(mContext, parent);
-            }
-        }
-
-        @Override
-        public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
-            if (holder.getItemViewType()==VIEW_TYPE_COMMENT1) {
-                CommentItem commentItem = (CommentItem) mMultipleItems.get(position);
-                if(holder instanceof CommentHolder){
-                    ((CommentHolder) holder).onBindView(commentItem);
-                }
-            } else {
-                CommentItem commentItem =(CommentItem)mMultipleItems.get(position);
-                if(holder instanceof CommentCommentHolder) {
-                    ((CommentCommentHolder) holder).onBindView(commentItem);
-                }
-            }
-        }
-
-        @Override
-        public int getItemViewType(int position) {
-            if (position == 0) return VIEW_TYPE_COMMENT1;
-            else return VIEW_TYPE_COMMENT2;
-        }
-
-        @Override
-        public int getItemCount() {
-            return  mMultipleItems.size();
-        }
     }
 
 

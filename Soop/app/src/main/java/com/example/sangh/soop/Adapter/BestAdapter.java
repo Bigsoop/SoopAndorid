@@ -1,5 +1,4 @@
 package com.example.sangh.soop.Adapter;
-
 import android.content.Context;
 import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
@@ -9,7 +8,6 @@ import android.view.ViewGroup;
 import com.example.sangh.soop.Holder.BestHolder;
 import com.example.sangh.soop.Model.MainItem;
 import com.example.sangh.soop.R;
-
 import java.util.ArrayList;
 
 /**

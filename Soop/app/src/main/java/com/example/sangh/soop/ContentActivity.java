@@ -8,12 +8,9 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import com.example.sangh.soop.Holder.BaseViewHolder;
-import com.example.sangh.soop.Holder.CommentHolder;
-import com.example.sangh.soop.Holder.ContentHolder;
+import com.example.sangh.soop.Adapter.ContentAdapter;
 import com.example.sangh.soop.Model.CommentItem;
 import com.example.sangh.soop.Model.ContentItem;
 import com.example.sangh.soop.Model.MainItem;
@@ -129,7 +126,7 @@ public class ContentActivity extends AppCompatActivity {
     }
 
     private void updateUI() {
-        mAdapter = new ContentAdapter();
+        mAdapter = new ContentAdapter(mContext, mMultipleItems);
         mRecyclerView.setAdapter(mAdapter);
     }
 
@@ -203,52 +200,6 @@ public class ContentActivity extends AppCompatActivity {
             new GreenToast(getApplicationContext()).showToast("로그인을 하면 댓글을 볼 수 있습니다.");
         }
     }
-
-
-    public class ContentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
-        public static final int VIEW_TYPE_CONTENT = 0;
-        public static final int VIEW_TYPE_COMMENT = 1;
-
-        public ContentAdapter() {
-        }
-
-        @Override
-        public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            if (viewType == VIEW_TYPE_CONTENT) {
-                return ContentHolder.newInstance(mContext,parent);
-            } else {
-                return CommentHolder.newInstance(mContext, parent);
-            }
-        }
-
-        @Override
-        public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
-            if (holder.getItemViewType()==VIEW_TYPE_CONTENT) {
-                ContentItem contentItem = (ContentItem) mMultipleItems.get(position);
-                if(holder instanceof ContentHolder){
-                    ((ContentHolder) holder).onBindView(contentItem);
-                }
-            } else {
-                CommentItem commentItem =(CommentItem)mMultipleItems.get(position);
-                if(holder instanceof CommentHolder) {
-                    ((CommentHolder) holder).onBindView(commentItem);
-                }
-            }
-        }
-
-        @Override
-        public int getItemViewType(int position) {
-            if (position == 0) return VIEW_TYPE_CONTENT;
-            else return VIEW_TYPE_COMMENT;
-        }
-
-        @Override
-        public int getItemCount() {
-            return  mMultipleItems.size();
-        }
-    }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
