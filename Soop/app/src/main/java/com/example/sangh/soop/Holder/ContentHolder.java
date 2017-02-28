@@ -1,5 +1,7 @@
 package com.example.sangh.soop.Holder;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +37,7 @@ public class ContentHolder extends BaseViewHolder<ContentItem>{
         private TextView mBody;
         private TextView mShare;
         private LinearLayout layLike;
+        private LinearLayout shareBtn;
 
         public static ContentHolder newInstance(Context con,ViewGroup parent){
             View itemView = LayoutInflater.from(parent.getContext())
@@ -53,6 +56,7 @@ public class ContentHolder extends BaseViewHolder<ContentItem>{
             mBody = (TextView) itemView.findViewById(R.id.body_content);
             mShare =(TextView)itemView.findViewById(R.id.share_content);
             layLike= (LinearLayout)itemView.findViewById(R.id.like_linear);
+            shareBtn= (LinearLayout)itemView.findViewById(R.id.share_linear);
         }
 
         public void onBindView(ContentItem item){
@@ -65,23 +69,25 @@ public class ContentHolder extends BaseViewHolder<ContentItem>{
             mDate.setText(mItem.getDate());
             Common.setCircleImage(mContext, mItem.getUniMark(), mUniMark);
             layLike.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i =Common.getFacebookIntent(mContext , Uri.parse("https://www.facebook.com/"+mItem.getId()+"/"));
+                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    mContext.startActivity(i);
+                }
+            });
+
+            shareBtn.setOnClickListener(new View.OnClickListener(){
 
                 @Override
                 public void onClick(View v) {
-                    mLike.setText(" 좋아요 "+(mItem.getLike()+1)+"명");
-                    new GraphRequest(
-                            AccessToken.getCurrentAccessToken(),
-                            "/"+mItem.getId()+"/likes",
-                            null,
-                            HttpMethod.POST,
-                            new GraphRequest.Callback() {
-                                    public void onCompleted(GraphResponse response) {
-                                        AppLog.i(TAG,response.toString());
-                                        new GreenToast(mContext).showToast("좋아요!");
-                                    }
-                            }
-                    ).executeAsync();
+                    Intent i =Common.getFacebookIntent(mContext, Uri.parse("https://www.facebook.com/"+mItem.getId()+"/"));
+                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    mContext.startActivity(i);
                 }
             });
         }
+
+
+
 }

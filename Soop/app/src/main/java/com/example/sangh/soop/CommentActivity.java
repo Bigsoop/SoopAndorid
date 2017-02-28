@@ -5,20 +5,20 @@ package com.example.sangh.soop;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
+
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.sangh.soop.Adapter.CommentAdapter;
-import com.example.sangh.soop.Holder.BaseViewHolder;
-import com.example.sangh.soop.Holder.CommentCommentHolder;
-import com.example.sangh.soop.Holder.CommentHolder;
+
 import com.example.sangh.soop.Model.CommentItem;
 import com.example.sangh.soop.Model.MainItem;
 import com.example.sangh.soop.view.GreenToast;
@@ -44,6 +44,10 @@ import java.util.List;
 public class CommentActivity extends AppCompatActivity {
 
     private final String TAG = "CommentActivity";
+    private final int MSG_DATACHANGE =0;
+    private final int MSG_ERR_TOAST = 1;
+    private Handler mHandler;
+
     private Toolbar mToolbar;
     private RecyclerView mRecyclerView;
     private List<MainItem> mMultipleItems;
@@ -86,6 +90,18 @@ public class CommentActivity extends AppCompatActivity {
 
         inputData();
         updateUI();
+
+
+        mHandler = new Handler(new Handler.Callback() {
+            @Override
+            public boolean handleMessage(Message msg) {
+                switch (msg.what){
+                    case 0: mCommentAdapter.notifyDataSetChanged(); break;
+                    case 1: new GreenToast(mContext).showToast("네트워크 연결 상태를 확인해주세요"); break;
+                }
+                return false;
+            }
+        });
 
         editComment =(EditText)findViewById(R.id.editTextComment);
         inputCommentBtn = (Button) findViewById(R.id.input_comment_btn_comment);
@@ -137,6 +153,7 @@ public class CommentActivity extends AppCompatActivity {
         commentItem.setLike(like);
         commentItem.setUserId(userId);
         commentItem.setComment(comment);
+        commentItem.setId(commentId);
         commentItem.setComment_able(false);
         mMultipleItems.add(commentItem);
 
@@ -158,7 +175,7 @@ public class CommentActivity extends AppCompatActivity {
                                 JSONObject from = cur.getJSONObject("from");
                                 commentItem.setUserId(from.getString("id"));
                                 commentItem.setUserName(from.getString("name"));
-                                commentItem.setId(cur.getString("id"));
+                                commentItem.setId(commentId);
                                 commentItem.setDate(Common.dateFormat(cur.getString("created_time")));
                                 commentItem.setBody(cur.getString("message"));
                                 commentItem.setLike(Integer.parseInt(cur.getString("like_count")));
@@ -178,6 +195,7 @@ public class CommentActivity extends AppCompatActivity {
                                                     mCommentAdapter.notifyDataSetChanged();
                                                 }catch (JSONException e){
                                                     e.printStackTrace();
+                                                    mHandler.sendEmptyMessage(MSG_ERR_TOAST);
                                                 }
                                             }
                                         }
@@ -188,6 +206,7 @@ public class CommentActivity extends AppCompatActivity {
 
                         } catch (JSONException e) {
                             e.printStackTrace();
+                            mHandler.sendEmptyMessage(MSG_ERR_TOAST);
                         }
                     }
                 }

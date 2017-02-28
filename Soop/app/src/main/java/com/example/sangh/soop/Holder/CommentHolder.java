@@ -29,6 +29,7 @@ public class CommentHolder extends BaseViewHolder<CommentItem>{
     private TextView mBody;
     private LinearLayout commentBtn;
     private LinearLayout likeBtn;
+    private LinearLayout shareBtn;
 
     public static CommentHolder newInstance(Context con,ViewGroup parent){
         View itemView = LayoutInflater.from(parent.getContext())
@@ -54,6 +55,7 @@ public class CommentHolder extends BaseViewHolder<CommentItem>{
         mBody = (TextView) itemView.findViewById(R.id.body_comment);
         commentBtn = (LinearLayout) itemView.findViewById(R.id.comment_linear);
         likeBtn =(LinearLayout)itemView.findViewById(R.id.like_linear);
+        shareBtn=(LinearLayout)itemView.findViewById(R.id.share_linear);
     }
 
 
@@ -97,7 +99,9 @@ public class CommentHolder extends BaseViewHolder<CommentItem>{
         likeBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                 mLike.setText(" 좋아요 "+ (mItem.getLike()+1) +"명");
+                    Intent i =Common.getFacebookIntent(mCon, Uri.parse("https://www.facebook.com/"+mItem.getId()+"/"));
+                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    mCon.startActivity(i);
             }
         });
 

@@ -141,7 +141,7 @@
                 android:orientation="horizontal"
                 android:gravity="center"
                 android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true">
+                android:layout_alignParentRight="true">
 
                 <ImageView
                     android:layout_width="12.5dp"

@@ -69,7 +69,9 @@ public class CommentCommentHolder extends BaseViewHolder<CommentItem>{
         likeBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                mLike.setText(" 좋아요 "+ (mItem.getLike()+1) +"명");
+                    Intent i =Common.getFacebookIntent(mCon, Uri.parse("https://www.facebook.com/"+mItem.getId()+"/"));
+                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    mCon.startActivity(i);
             }
         });
 

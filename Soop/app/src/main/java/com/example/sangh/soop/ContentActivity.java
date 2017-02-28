@@ -2,6 +2,8 @@ package com.example.sangh.soop;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -35,11 +37,16 @@ import java.util.List;
 public class ContentActivity extends AppCompatActivity {
 
     private final String TAG ="ContentActivity";
+    private final int MSG_DATACHANGE =0;
+    private final int MSG_ERR_TOAST = 1;
+
     private Toolbar mToolbar;
     private RecyclerView mRecyclerView;
     private ContentAdapter mAdapter;
     private List<MainItem> mMultipleItems;
     private Context mContext;
+    private Handler mHandler;
+
     int comment;
     int like;
     int share;
@@ -75,6 +82,18 @@ public class ContentActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(uniName+" 대나무숲의 글");
+
+        mHandler = new Handler(new Handler.Callback() {
+            @Override
+            public boolean handleMessage(Message msg) {
+                switch (msg.what){
+                    case 0: mAdapter.notifyDataSetChanged(); break;
+                    case 1: new GreenToast(mContext).showToast("네트워크 연결 상태를 확인해주세요"); break;
+                }
+                return false;
+            }
+        });
+
 
         inputData();
         updateUI();
@@ -182,6 +201,7 @@ public class ContentActivity extends AppCompatActivity {
                                                             mAdapter.notifyDataSetChanged();
                                                         } catch (JSONException e) {
                                                             e.printStackTrace();
+                                                            mHandler.sendEmptyMessage(MSG_ERR_TOAST);
                                                         }
                                                     }
                                                 }
@@ -191,6 +211,7 @@ public class ContentActivity extends AppCompatActivity {
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
+                                    mHandler.sendEmptyMessage(MSG_ERR_TOAST);
                                 }
                             }
                         }
