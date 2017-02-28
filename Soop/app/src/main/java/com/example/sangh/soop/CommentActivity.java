@@ -32,10 +32,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by sangh on 2017-02-20.
@@ -176,9 +178,14 @@ public class CommentActivity extends AppCompatActivity {
                                 commentItem.setUserId(from.getString("id"));
                                 commentItem.setUserName(from.getString("name"));
                                 commentItem.setId(commentId);
-                                commentItem.setDate(Common.dateFormat(cur.getString("created_time")));
                                 commentItem.setBody(cur.getString("message"));
                                 commentItem.setLike(Integer.parseInt(cur.getString("like_count")));
+
+                                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.KOREA);
+                                String date = cur.getString("created_time");
+                                java.util.Date date2 =format.parse(date);
+                                String result = format.format(date2);
+                                commentItem.setDate(Common.dateFormat(result));
 
                                 new GraphRequest(
                                         AccessToken.getCurrentAccessToken(),
@@ -207,6 +214,8 @@ public class CommentActivity extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                             mHandler.sendEmptyMessage(MSG_ERR_TOAST);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
                         }
                     }
                 }

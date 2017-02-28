@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "729453440022",
+    "firebase_url": "https://soop-deb6e.firebaseio.com",
+    "project_id": "soop-deb6e",
+    "storage_bucket": "soop-deb6e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:729453440022:android:818129cbcaecb450",
+        "android_client_info": {
+          "package_name": "com.example.sangh.soop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "729453440022-88j6mdr8buikgbt7d4psjlgb45o3e902.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8ivGhIhC9aS4rV_oMsVdicw5VVZIlZ-s"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

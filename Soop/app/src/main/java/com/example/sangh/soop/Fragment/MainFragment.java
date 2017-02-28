@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.example.sangh.soop.Adapter.MainAdapter;
 import com.example.sangh.soop.AppLog;
+import com.example.sangh.soop.Common;
 import com.example.sangh.soop.Constant;
 import com.example.sangh.soop.Model.MainItem;
 import com.example.sangh.soop.NetworkRequests;
@@ -137,6 +138,7 @@ public class MainFragment extends Fragment{
                             JSONObject cur = responseJson.getJSONObject(i);
                             final MainItem mainItem = new MainItem();
                             if(!mainItem.setJsonObject(cur)) continue;
+
                             new GraphRequest(
                                     AccessToken.getCurrentAccessToken(),
                                     mainItem.getUniMarkUrl()+"?redirect=false",

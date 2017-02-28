@@ -29,7 +29,6 @@ public class CommentHolder extends BaseViewHolder<CommentItem>{
     private TextView mBody;
     private LinearLayout commentBtn;
     private LinearLayout likeBtn;
-    private LinearLayout shareBtn;
 
     public static CommentHolder newInstance(Context con,ViewGroup parent){
         View itemView = LayoutInflater.from(parent.getContext())
@@ -55,7 +54,6 @@ public class CommentHolder extends BaseViewHolder<CommentItem>{
         mBody = (TextView) itemView.findViewById(R.id.body_comment);
         commentBtn = (LinearLayout) itemView.findViewById(R.id.comment_linear);
         likeBtn =(LinearLayout)itemView.findViewById(R.id.like_linear);
-        shareBtn=(LinearLayout)itemView.findViewById(R.id.share_linear);
     }
 
 
