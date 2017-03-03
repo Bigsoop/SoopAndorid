@@ -38,7 +38,8 @@ public class ContentHolder extends BaseViewHolder<ContentItem>{
         private TextView mShare;
         private LinearLayout layLike;
         private LinearLayout shareBtn;
-        private LinearLayout commentBtn;
+        private LinearLayout comment_btn;
+
 
         public static ContentHolder newInstance(Context con,ViewGroup parent){
             View itemView = LayoutInflater.from(parent.getContext())
@@ -57,8 +58,8 @@ public class ContentHolder extends BaseViewHolder<ContentItem>{
             mBody = (TextView) itemView.findViewById(R.id.body_content);
             mShare =(TextView)itemView.findViewById(R.id.share_content);
             layLike= (LinearLayout)itemView.findViewById(R.id.like_linear);
-            shareBtn= (LinearLayout)itemView.findViewById(R.id.share_linear);
-            commentBtn=(LinearLayout)itemView.findViewById(R.id.comment_linear);
+            shareBtn=(LinearLayout)itemView.findViewById(R.id.share_linear);
+            comment_btn=(LinearLayout)itemView.findViewById(R.id.comment_linear);
         }
 
         public void onBindView(ContentItem item){
@@ -73,7 +74,16 @@ public class ContentHolder extends BaseViewHolder<ContentItem>{
             layLike.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i =Common.getFacebookIntent(mContext , Uri.parse("https://www.facebook.com/"+mItem.getId()+"/"));
+                    Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/"+ mItem.getId()));
+                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    mContext.startActivity(i);
+                }
+            });
+
+            comment_btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/"+ mItem.getId()));
                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                     mContext.startActivity(i);
                 }
@@ -83,17 +93,7 @@ public class ContentHolder extends BaseViewHolder<ContentItem>{
 
                 @Override
                 public void onClick(View v) {
-                    Intent i =Common.getFacebookIntent(mContext, Uri.parse("https://www.facebook.com/"+mItem.getId()+"/"));
-                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    mContext.startActivity(i);
-                }
-            });
-
-            commentBtn.setOnClickListener(new View.OnClickListener(){
-
-                @Override
-                public void onClick(View v) {
-                    Intent i =Common.getFacebookIntent(mContext, Uri.parse("https://www.facebook.com/"+mItem.getId()+"/"));
+                    Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/"+ mItem.getId()));
                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                     mContext.startActivity(i);
                 }

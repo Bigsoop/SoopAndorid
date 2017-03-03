@@ -97,7 +97,7 @@ public class CommentHolder extends BaseViewHolder<CommentItem>{
         likeBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                    Intent i =Common.getFacebookIntent(mCon, Uri.parse("https://www.facebook.com/"+mItem.getId()+"/"));
+                    Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/"+ mItem.getId()));
                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                     mCon.startActivity(i);
             }
