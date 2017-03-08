@@ -28,6 +28,7 @@
                 android:textSize="15dp"
                 android:textStyle="bold"
                 tools:text="스탠포드대학교"
+                android:textColor="#000000"
                 android:layout_toRightOf="@+id/uni_mark_content"/>
 
             <ImageView
@@ -45,7 +46,7 @@
                 android:layout_marginRight="10dp"
                 android:src="@drawable/stanford"
                 android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true"/>
+                android:layout_alignParentLeft="true"/>
 
             <TextView
                 android:id="@+id/main_date_content"
@@ -54,7 +55,7 @@
                 android:textSize="10dp"
                 tools:text="2017년 2월 15일 오후 9:37"
                 android:layout_below="@+id/uni_name_content"
-                android:layout_toEndOf="@+id/uni_mark_content"/>
+                android:layout_toRightOf="@+id/uni_mark_content"/>
 
         </RelativeLayout>
 
@@ -72,6 +73,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1080"
                 android:textSize="12dp"
+                android:textColor="#000000"
                 tools:text="우리학교 솔직히 지잡대아님? 자꾸 세계 1류 대학인척 하는데 무슨 소리인지 모르겠다는 것은 사실 페이크였고 우리학교는 세계 최고의 대학교인건 솔직히ㅇㅈ? ㄹㅇㅍㅌ ?? ㅂㅂㅂㄱ?? ㅇㅇ ㅇㅇㅈ"/>
 
         </LinearLayout>
@@ -104,6 +106,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="10dp"
+                    android:textColor="#000000"
                     android:text="좋아요 100명"/>
             </LinearLayout>
 
@@ -128,6 +131,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="10dp"
+                    android:textColor="#000000"
                     android:text="댓글 20개"/>
             </LinearLayout>
 
@@ -153,6 +157,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="10dp"
+                    android:textColor="#000000"
                     android:text="공유 20회"/>
             </LinearLayout>
 

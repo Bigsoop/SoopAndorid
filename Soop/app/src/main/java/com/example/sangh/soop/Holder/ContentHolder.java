@@ -14,12 +14,22 @@ import com.example.sangh.soop.Model.ContentItem;
 import com.example.sangh.soop.R;
 import com.example.sangh.soop.view.GreenToast;
 import com.facebook.AccessToken;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
+import com.facebook.Profile;
+import com.facebook.share.ShareApi;
+import com.facebook.share.Sharer;
+import com.facebook.share.model.ShareLinkContent;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.net.URL;
+
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 /**
  * Created by sangh on 2017-02-16.
@@ -93,9 +103,34 @@ public class ContentHolder extends BaseViewHolder<ContentItem>{
 
                 @Override
                 public void onClick(View v) {
-                    Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/"+ mItem.getId()));
-                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    mContext.startActivity(i);
+                    ShareLinkContent content = new ShareLinkContent.Builder()
+                            .setContentUrl(Uri.parse("https://www.facebook.com/"+mItem.getId()))
+                            .setContentTitle(mItem.getUniName()+ " 대나무숲의 글")
+                            .setContentDescription(mItem.getBody())
+                            .setImageUrl(Uri.parse(mItem.getUniMark()))
+                            .build();
+
+
+                    ShareApi shareApi =new ShareApi(content);
+                    shareApi.share(new FacebookCallback<Sharer.Result>() {
+                        @Override
+                        public void onSuccess(Sharer.Result result) {
+                            new GreenToast(mContext).showToast("공유되었습니다");
+                            Intent i =Common.getFacebookIntent(getApplicationContext() ,Profile.getCurrentProfile().getLinkUri());
+                            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            mContext.startActivity(i);
+                        }
+
+                        @Override
+                        public void onCancel() {
+                            new GreenToast(mContext).showToast("공유취소");
+                        }
+
+                        @Override
+                        public void onError(FacebookException error) {
+                            new GreenToast(mContext).showToast("공유실패");
+                        }
+                    });
                 }
             });
         }

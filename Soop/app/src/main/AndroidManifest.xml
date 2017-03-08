@@ -53,7 +53,9 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-
+        <provider android:authorities="com.facebook.app.FacebookContentProvider1196677553719613"
+                  android:name="com.facebook.FacebookContentProvider"
+                  android:exported="true"/>
 
     </application>
 

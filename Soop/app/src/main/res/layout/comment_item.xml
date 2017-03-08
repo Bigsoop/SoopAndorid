@@ -40,6 +40,7 @@
                     android:layout_marginRight="11dp"
                     android:textSize="12dp"
                     android:textStyle="bold"
+                    android:textColor="#000000"
                     android:text="김설현"/>
 
                 <TextView
@@ -48,6 +49,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
                     android:textSize="12dp"
+                    android:textColor="#000000"
                     tools:text="스탠포드 가구씨뽀용 ~  ㅋㄷㅋㄷㅋㄷㅋㄷㅋㄷㅋㄷㅋㄷㅋㄷㅋㄷ  한국엔 항공대 미국엔 스탠포드!"/>
 
                 <TextView
@@ -88,6 +90,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="좋아요 100명"
+                    android:textColor="#000000"
                     android:textSize="10dp"/>
             </LinearLayout>
 
@@ -113,6 +116,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="10dp"
+                    android:textColor="#000000"
                     android:text="댓글 20개"/>
             </LinearLayout>
 
