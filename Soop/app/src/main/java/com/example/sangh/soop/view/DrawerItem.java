@@ -41,14 +41,12 @@ public class DrawerItem extends LinearLayout {
 
     private void initView(){
         LayoutInflater.from(mCon).inflate(R.layout.drawer_item,this);
-        img_icon = (ImageView)findViewById(R.id.nav_image);
         txt_menu = (TextView)findViewById(R.id.nav_text);
         this.setClickable(true);
 
     }
 
     public void setItemView(int draw, String txt){
-        img_icon.setImageResource(draw);
         txt_menu.setText(txt);
     }
 

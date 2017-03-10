@@ -53,25 +53,6 @@ public class BestHolder extends MainHolder {
         mDate.setText(mItem.getDate());
         Common.setCircleImage(mcon, mItem.getUniMark(), mUniMark);
 
-        likeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/"+ mItem.getId()));
-                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                mCon.startActivity(i);
-            }
-        });
-
-        shareBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/"+ mItem.getId()));
-                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                mCon.startActivity(i);
-            }
-        });
-
-
     }
 
 }

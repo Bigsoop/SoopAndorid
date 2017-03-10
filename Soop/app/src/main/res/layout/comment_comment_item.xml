@@ -89,7 +89,7 @@
                 android:layout_marginLeft="17.5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="23dp"
-                android:background="#cbf4e0"
+                android:background="@drawable/selector_btn_click"
                 android:orientation="horizontal"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="10dp"
