@@ -18,8 +18,6 @@ import java.util.concurrent.CompletionService;
 
 public class IntroLoginActivity extends AppCompatActivity {
     private final String TAG ="IntroLoginActivity";
-
-    Button startBtn;
     LoginButton mLoginButton;
     CallbackManager callbackManager;
     boolean loginStatus;
@@ -65,15 +63,6 @@ public class IntroLoginActivity extends AppCompatActivity {
                 @Override
                 public void onError(FacebookException error) {
 
-                }
-            });
-
-            startBtn = (Button) (findViewById(R.id.btn_start));
-            startBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(IntroLoginActivity.this, MainActivity.class);
-                    startActivity(intent);
                 }
             });
         }

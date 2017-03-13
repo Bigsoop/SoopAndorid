@@ -38,16 +38,14 @@ import okhttp3.Response;
 public class MainFragment extends Fragment{
 
     private final String TAG = "MainFragment";
-
     private RecyclerView mMainRecyclerView;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private MainAdapter mAdapter;
     private ArrayList<MainItem> mMainItems=new ArrayList<>();;
-
     private Handler mHandler;
     private final int MSG_DATACHANGE =0;
     private final int MSG_ERR_TOAST = 1;
-
+    private long requestTime;
     private boolean requireUpdate = true;
     private String lastTime = "2030-1-1 12:00";
 
@@ -66,11 +64,13 @@ public class MainFragment extends Fragment{
             @Override
             public void onRefresh() {
                 mSwipeRefreshLayout.setRefreshing(false);
-                lastTime = "2030-1-1 12:00";
-                mMainItems.clear();
-                requestMainData(lastTime);
-                updateUI();
-                new GreenToast(getActivity()).showToast("업데이트 되었습니다");
+
+                if(requestTime+2000<System.currentTimeMillis()) {
+                    lastTime = "2030-1-1 12:00";
+                    mMainItems.clear();
+                    requestMainData(lastTime);
+                    updateUI();
+                }
             }
         });
 
@@ -120,6 +120,8 @@ public class MainFragment extends Fragment{
 
 
     private void requestMainData(String date){
+        requestTime=System.currentTimeMillis();
+
         if(!requireUpdate) return;
         requireUpdate=false;
         try {
@@ -151,6 +153,7 @@ public class MainFragment extends Fragment{
                                                 JSONObject data = userImg.getJSONObject("data");
                                                 mainItem.setUniMark(data.getString("url"));
                                                 mAdapter.notifyDataSetChanged();
+
                                             }catch (JSONException e){
                                                 e.printStackTrace();
                                             }
