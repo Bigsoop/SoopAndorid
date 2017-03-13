@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -51,6 +52,8 @@ public class ContentActivity extends AppCompatActivity {
     private Context mContext;
     private Handler mHandler;
 
+    private String after="";
+
     int comment;
     int like;
     int share;
@@ -62,6 +65,8 @@ public class ContentActivity extends AppCompatActivity {
     Button inputCommentBtn;
     EditText editComment;
     boolean loginStatus;
+    boolean requireUpdate= false;
+
     @Override
     protected void onCreate(Bundle savedSavedInstance) {
         super.onCreate(savedSavedInstance);
@@ -72,6 +77,28 @@ public class ContentActivity extends AppCompatActivity {
         mToolbar = (Toolbar) findViewById(R.id.toolbar_content);
         mRecyclerView = (RecyclerView) findViewById(R.id.content_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+            }
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+
+                int offset = recyclerView.computeVerticalScrollOffset();
+                int extent = recyclerView.computeVerticalScrollExtent();
+                int range = recyclerView.computeVerticalScrollRange();
+
+                if(range-offset < extent*3 && requireUpdate){
+                    Log.i(TAG,"맨 아래!!");
+                    getComment();
+                }
+            }
+        });
 
         Intent intent = getIntent();
         id = intent.getExtras().getString("id");
@@ -174,9 +201,16 @@ public class ContentActivity extends AppCompatActivity {
                         HttpMethod.GET,
                         new GraphRequest.Callback() {
                             public void onCompleted(GraphResponse response) {
+                                requireUpdate=true;
                                 JSONObject jo = response.getJSONObject();
                                 try {
                                     JSONArray ja = jo.getJSONArray("data");
+
+                                    JSONObject pageObject = jo.getJSONObject("paging");
+                                    JSONObject cursorObject = pageObject.getJSONObject("cursors");
+
+                                    if(!pageObject.has("next")) requireUpdate=false;
+                                    else after = cursorObject.getString("after");
 
                                     for (int i = 0; i < ja.length(); i++) {
                                         final CommentItem commentItem = new CommentItem();
@@ -191,7 +225,7 @@ public class ContentActivity extends AppCompatActivity {
 
                                         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.KOREA);
                                         String date = cur.getString("created_time");
-                                        java.util.Date date2 =format.parse(date);
+                                        Date date2 =format.parse(date);
                                         String result = format.format(date2);
                                         commentItem.setDate(Common.dateFormat(result));
 
@@ -231,6 +265,83 @@ public class ContentActivity extends AppCompatActivity {
         else{
             new GreenToast(getApplicationContext()).showToast("로그인을 하면 댓글을 볼 수 있습니다.");
         }
+    }
+
+    private void getComment(){
+        GraphRequest request = new GraphRequest(
+                AccessToken.getCurrentAccessToken(),
+                "/" + id + "/comments",
+                null,
+                HttpMethod.GET,
+                new GraphRequest.Callback() {
+                    public void onCompleted(GraphResponse response) {
+                        requireUpdate=true;
+                        JSONObject jo = response.getJSONObject();
+                        try {
+                            JSONArray ja = jo.getJSONArray("data");
+
+                            JSONObject pageObject = jo.getJSONObject("paging");
+                            JSONObject cursorObject = pageObject.getJSONObject("cursors");
+                            if(!pageObject.has("next")) requireUpdate=false;
+                            else after = cursorObject.getString("after");
+
+                            for (int i = 0; i < ja.length(); i++) {
+                                final CommentItem commentItem = new CommentItem();
+                                JSONObject cur = ja.getJSONObject(i);
+                                JSONObject from = cur.getJSONObject("from");
+                                commentItem.setUserId(from.getString("id"));
+                                commentItem.setUserName(from.getString("name"));
+                                commentItem.setId(cur.getString("id"));
+                                commentItem.setBody(cur.getString("message"));
+                                commentItem.setLike(Integer.parseInt(cur.getString("like_count")));
+                                commentItem.setComment(Integer.parseInt(cur.getString("comment_count")));
+
+                                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.KOREA);
+                                String date = cur.getString("created_time");
+                                java.util.Date date2 =format.parse(date);
+                                String result = format.format(date2);
+                                commentItem.setDate(Common.dateFormat(result));
+
+                                new GraphRequest(
+                                        AccessToken.getCurrentAccessToken(),
+                                        "/" + commentItem.getUserId() + "/picture?redirect=false",
+                                        null,
+                                        HttpMethod.GET,
+                                        new GraphRequest.Callback() {
+                                            public void onCompleted(GraphResponse response) {
+                                                try {
+                                                    AppLog.i(TAG, "/" + commentItem.getUserId() + "/picture");
+                                                    JSONObject userImg = response.getJSONObject();
+                                                    JSONObject data = userImg.getJSONObject("data");
+                                                    commentItem.setUserImg(data.getString("url"));
+                                                    mAdapter.notifyDataSetChanged();
+                                                } catch (JSONException e) {
+                                                    e.printStackTrace();
+                                                    mHandler.sendEmptyMessage(MSG_ERR_TOAST);
+                                                }
+                                            }
+                                        }
+                                ).executeAsync();
+                                mMultipleItems.add(commentItem);
+                                mAdapter.notifyDataSetChanged();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            mHandler.sendEmptyMessage(MSG_ERR_TOAST);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+        );
+
+        Bundle parameters = new Bundle();
+        parameters.putString("fields", "like_count,comment_count,message,created_time,user_likes,from");
+        parameters.putString("after",  after);
+        parameters.putString("limit", "25");
+        parameters.putString("pretty", "0");
+        request.setParameters(parameters);
+        request.executeAsync();
     }
 
     @Override
