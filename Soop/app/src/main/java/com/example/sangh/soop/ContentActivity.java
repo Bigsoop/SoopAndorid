@@ -93,7 +93,7 @@ public class ContentActivity extends AppCompatActivity {
                 int extent = recyclerView.computeVerticalScrollExtent();
                 int range = recyclerView.computeVerticalScrollRange();
 
-                if(range-offset < extent && requireUpdate){
+                if(range-offset < extent*3 && requireUpdate){
                     Log.i(TAG,"맨 아래!!");
                     getComment();
                 }
