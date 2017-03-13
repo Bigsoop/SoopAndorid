@@ -45,7 +45,7 @@ public class BestActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("Best");
+        getSupportActionBar().setTitle("Weekly Best");
 
         mHandler = new Handler(new Handler.Callback() {
             @Override
